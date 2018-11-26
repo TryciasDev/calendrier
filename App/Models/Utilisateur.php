@@ -45,9 +45,14 @@ class Utilisateur extends DB\SQL\Mapper {
 
 	function getProfil($id)
 	{
+		$participant = getProfilSimple($id);
+		$participant->amis = $this->getAmis($id);
+		return $participant;
+	}
+	function getProfilSimple($id)
+	{
 		$participant = new DB\SQL\Mapper($this->db, 'participants');
 		$participant->load(array('numero=?',$id));
-		$participant->amis = $this->getAmis($id);
 		return $participant;
 	}
 

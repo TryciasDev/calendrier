@@ -1,129 +1,20 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Mon Calendrier de l'Avent">
-    <meta name="author" content="Patricia Trauman">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>Mon calendrier de l'Avent</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  </head>
-  <body>
-    <!-- Menu -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/MonProfil/1">Mon Profil <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Mon Calendrier</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mes amis</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown08">
-              <repeat group="{{@amis}}" value="{{@ami}}">
-                <a class="dropdown-item" href="/calendrierAmi/{{@ami['numero']}}/{{@numero}}">{{@ami['identifiant']}}</a>
-              </repeat>
-              <a class="dropdown-item" href="/invite">Inviter un(e) ami(e)</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
 <div class="jumbotron jumbotron-fluid text-center">
 		  <h1>Calendrier de {{@datas->identifiant}} ...</h1>
 		  <p>Ci dessous le calendrier de {{@datas->identifiant}} concoctée par toi et vos amis commun.</p>
 		  <p>les défis, attentions, portée par des tiers absent de ton cercle ne sont te sont pas visible</p> 
 </div>
 <div class="container-fluid">
-	<div class="row" id="01">
-    <div class="col">
-	<div class="card"  >
-		<div class="card-body">
-			<h5 class="card-title">01 décembre</h5>
-			<h6 class="card-subtitle mb-2 text-muted">5 défi dont 3 par votre cercle d'ami</h6>
-			<p class="card-text">Défi #1 par {{@toto}}:  Faire 5 *30 secondes de planche</p>
-			<p class="card-text">Défi #1 par {{@tata}}:  lire 5 page de Kent</p>
-			<a class="card-link">Ajouter un défi</a>
-		</div>
-	</div>
-	</div>
-    <div class="col">
-	<div class="card"  >
-		<div class="card-body">
-			<h5 class="card-title">02 décembre</h5>
-			<h6 class="card-subtitle mb-2 text-muted">5 défi dont 3 par votre cercle d'ami</h6>
-			<p class="card-text">Défi #1 par {{@toto}}:  Faire 5 *30 secondes de planche</p>
-			<p class="card-text">Défi #1 par {{@tata}}:  lire 5 page de Kent</p>
-			<a class="card-link">Ajouter un défi</a>
-		</div>
-	</div>
-	</div>
-	</div>
-	<div class="row" id="01">
-    <div class="col">
-	<div class="card"  >
-		<div class="card-body">
-			<h5 class="card-title">03 décembre</h5>
-			<h6 class="card-subtitle mb-2 text-muted">5 défi dont 3 par votre cercle d'ami</h6>
-			<p class="card-text">Défi #1 par {{@toto}}:  Faire 5 *30 secondes de planche</p>
-			<p class="card-text">Défi #1 par {{@tata}}:  lire 5 page de Kent</p>
-			<a class="card-link">Ajouter un défi</a>
-		</div>
-	</div>
-	</div>
-	</div>
-	
-	
-	<div class="row" id="01">
-    <div class="col">
-		<h3>01 décembre</h3>
-		<div class="row">
-    <div class="col">
-      <h3>Par {{@}}, </h3>
-		{{@defi du jour}}
+  <!--repeat group="{{ @datas }}" value="{{ @jour }}" key="{{ @ikey }}"-->
+  <repeat group="{{ @datas }}" key="{{ @jour }}" value="{{ @infos }}">
+    <div class="card" id="{{ @jour }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ @infos['date'] }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ @infos['nbDefiTotal'] }} défis dont {{ @infos['nbDefi'] }}  fourni par votre groupe d'ami commun</h6>
+        <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
+          <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}:  {{ @defi['desc'] }}</p>
+        </repeat>
+        <a class="card-link" href="addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}">Ajouter un défi</a>
+      </div>
     </div>
-    <div class="col">
-      mdr, trop bien.
-		Tu vas voir ce que tu vas prendre les jours à venir
-    </div>
-  </div>
-		</div>
-  </div>
-	<div class="row" id="01">
-    <div class="col">
-		<h3>01 décembre</h3>
-		<div class="row">
-    <div class="col">
-      <h3>Par {{@}}, </h3>
-		{{@defi du jour}}
-    </div>
-    <div class="col">
-      mdr, trop bien.
-		Tu vas voir ce que tu vas prendre les jours à venir
-    </div>
-  </div>
-		</div>
-  </div>
-	<div class="row" id="01">
-    <div class="col">
-		<h3>01 décembre</h3>
-		<div class="row">
-    <div class="col">
-      <h3>Par {{@}}, </h3>
-		{{@defi du jour}}
-    </div>
-    <div class="col">
-      mdr, trop bien.
-		Tu vas voir ce que tu vas prendre les jours à venir
-    </div>
-  </div>
-		</div>
-  </div>
+  </repeat>	
 </div>

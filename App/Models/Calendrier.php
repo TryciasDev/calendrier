@@ -10,7 +10,7 @@ class Calendrier extends DB\SQL\Mapper {
 	function getCalendrierAmi($id, $numero)
 	{
 
-		$requete ="SELECT evenements.*, realisations.*, participants.identifiant, participants.numero ".
+		$requete ="SELECT day(evenements.jour) as numeroJour, evenements.*, realisations.*, participants.identifiant as pseudoAuteur, participants.numero ".
 					" FROM evenements".
 					" left join realisations on realisations.idEvent = evenements.idEvent ".
 					" left join lienUsers lien1 on lien1.user1 = evenements.author".
@@ -20,13 +20,21 @@ class Calendrier extends DB\SQL\Mapper {
 					" ORDER by evenements.jour";
 		$params = array('ami'=>$id, 
 						'user' => $numero);
-		echo "<pre>";
-		var_dump($params);
 		$listeEvent = $this->db->exec($requete, $params);
-		var_dump($listeEvent);
-die;
 		//return $this->find(array());
-		return $listeIdAmis;
+//    echo "<pre>"; var_dump($listeEvent);
+//    die;
+		return $listeEvent;
+	}
+
+	function getNbDefiByDay($id)
+	{
+		$requete = "select day(evenements.jour) as numeroJour, count(1) as compteur from evenements".
+					" where target = :ami".
+					" group by jour";
+		$params = array('ami'=>$id);
+		$listeEvent = $this->db->exec($requete, $params);
+		return $listeEvent;
 	}
 /*
 ALTER TABLE Orders
