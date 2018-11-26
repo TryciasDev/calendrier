@@ -1,0 +1,8 @@
+{
+  "name": "ptrauman/monCalendrier",
+  "description": "mon premier calendrier de l'Avent",
+  "require": {
+    "bcosca/fatfree": "^3.6",
+    "twbs/bootstrap": "^4"
+  }
+}
