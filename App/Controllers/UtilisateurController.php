@@ -15,11 +15,16 @@ class UtilisateurController extends Controller
   function monProfil()
   {
     $user = new Utilisateur($this->db);
-    $profil = $user->getProfil($this->f3->get('PARAMS.numero'));
+    $numero = $this->f3->get('PARAMS.numero');
+    if(is_null($numero))
+    {
+      $numero = $this->f3->get('POST.numero');
+    }
+    $profil = $user->getProfil($numero);
     $this->f3->set('datas', $profil);
     $this->f3->set("SESSION.profil", $profil);
 //$_SESSION['profil'] = $profil;
-//    echo "<pre>"; var_dump($profil['fields']);
+  //  echo "<pre>"; var_dump($profil);die;
     $this->f3->set('mode', 'update');
     $this->f3->set('view', 'profil.html');
     $this->affichage();

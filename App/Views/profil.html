@@ -60,7 +60,16 @@
 			    <textarea class="form-control form-control-plaintext" id="message" name="message" rows="3" maxlength="250">Hey, viens on va se faire un super calendrier de l'Avent</textarea>
 			  </div>
 	    </false>
-	</check>
+	</check>{{@datas}}
+	<repeat group="{{@datas->amis}}" value="{{@ami}}">
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <div class="input-group-text">
+		      <input type="checkbox" aria-label="Checkbox for following text input" value="{{@ami->numero}}">{{@ami->identifiant}}[{{@ami->nom}}]
+		    </div>
+		  </div>
+		</div>
+	</repeat>
 		  <button class="btn btn-primary" id="Save" type="submit">Enregistrer</button>
   	</form>
 </div>

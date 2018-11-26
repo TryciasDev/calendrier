@@ -31,11 +31,11 @@ class Utilisateur extends DB\SQL\Mapper {
 	function getAmis($id)
 	{
 
-		$requete ="select * from participants".
+		$requete ="select numero, identifiant, nom, prenom from participants".
 							" join lienUsers liens1 on liens1.user1 = participants.numero".
 							" where liens1.user2 = ?".
 							" union".
-							" select * from participants".
+							" select numero, identifiant, nom, prenom from participants".
 							" join lienUsers liens2 on liens2.user2 = participants.numero".
 							" where liens2.user1 = ?";
 		$listeIdAmis = $this->db->exec($requete, array($id, $id));

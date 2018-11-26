@@ -60,7 +60,17 @@
 			    <textarea class="form-control form-control-plaintext" id="message" name="message" rows="3" maxlength="250">Hey, viens on va se faire un super calendrier de l'Avent</textarea>
 			  </div>
 	    
-	<?php endif; ?>
+	<?php endif; ?><?= ($datas)."
+" ?>
+	<?php foreach (($datas->amis?:[]) as $ami): ?>
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <div class="input-group-text">
+		      <input type="checkbox" aria-label="Checkbox for following text input" value="<?= ($ami->numero) ?>"><?= ($ami->identifiant) ?>[<?= ($ami->nom) ?>]
+		    </div>
+		  </div>
+		</div>
+	<?php endforeach; ?>
 		  <button class="btn btn-primary" id="Save" type="submit">Enregistrer</button>
   	</form>
 </div>
