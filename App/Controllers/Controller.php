@@ -38,7 +38,8 @@ class Controller
     function beforeroute()
     {
         /* on remettra un truc du genre quand on aura une authent*/
-        if($this->f3->get('SESSION.user') === null && $this->f3->get('PATH') != "/" and false) {
+        $routeLibre = array('/', '/login', '/google_landing');
+        if($this->f3->get('SESSION.user') === null && in_array($this->f3->get('PATH'), $routeLibre)) {
             $this->f3->reroute('/login');
 //            $this->f3->reroute('/login');
             exit;

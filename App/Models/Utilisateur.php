@@ -56,4 +56,11 @@ class Utilisateur extends DB\SQL\Mapper {
 		return $participant;
 	}
 
+	function getUserByMail($email)
+	{
+		$participant = new DB\SQL\Mapper($this->db, 'participants');
+		$participant->load(array('email=?',$email));
+		return $participant;
+	}
+
 }
