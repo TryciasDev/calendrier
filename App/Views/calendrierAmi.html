@@ -11,14 +11,15 @@
         <h5 class="card-title">{{ @infos['date'] }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ @infos['nbDefiTotal'] }} défis dont {{ @infos['nbDefi'] }}  fourni par votre groupe d'ami commun</h6>
         <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
-          <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}:  {{ @defi['desc'] }}
+          <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}: <span id="descDefi_{{ @jour+1}}"> {{ @defi['desc'] }}</span>
             // {{@auteur}} // {{@defi['idAuteur']}}
           <check if="{{ @auteur==@defi['idAuteur'] }}">
               <true>
-                <a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}/{{ @defi['idEvent']}}">modifier</a>
+                <a class="card-link" href="javascript:addDefi('{{ @jour+1 }}','{{ @defi['idEvent']}});">modifier</a>
+                <!--a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}/{{ @defi['idEvent']}}">modifier</a-->
                 <!-- il serait bien que la suppression soit en ajax -->
                 <!-- tout comme l'ajout / modification des défis -->
-                <a class="card-link" href="/deleteDefi/{{ @defi['idEvent']}}">supprimer ({{ @defi['idEvent']}})</a>                
+                <a class="card-link" href="javascript:deleteDefi({{ @defi['idEvent']}})">supprimer ({{ @defi['idEvent']}})</a>                
               </true>
           </check>
           </p>
@@ -29,7 +30,22 @@
           </check>
         </repeat>
         <p>
-        <a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}">Ajouter un défi</a>
+	        <a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}">Ajouter un défi</a>
+			<div class="hide" id="addDefi_{{ @jour+1 }}">
+				<form method="Post" action="/addDefi/{{@auteur}}/{{ @ami }}/{{ @jour+1 }}" id="formulaire_{{ @jour+1 }}">
+					<input type="hidden" name="auteur" id="auteur_{{ @jour+1 }}" value="{{@auteur}}" />
+					<input type="hidden" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami}}" />
+					<input type="hidden" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_{{ @jour+1 }}" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save" data-toggle="modal" data-target="#confirmationDefi">Enregistrer</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+				  Launch demo modal
+				</button>	
+				</form>
+			</div>
       </p>
       </div>
     </div>
