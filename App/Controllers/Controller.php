@@ -39,7 +39,7 @@ class Controller
     {
         /* on remettra un truc du genre quand on aura une authent*/
         $routeLibre = array('/', '/login', '/google_landing');
-        if($this->f3->get('SESSION.user') === null && in_array($this->f3->get('PATH'), $routeLibre)) {
+        if($this->f3->get('SESSION.user') === null && in_array($this->f3->get('PATH'), $routeLibre) and false) {
             $this->f3->reroute('/login');
 //            $this->f3->reroute('/login');
             exit;

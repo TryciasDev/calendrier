@@ -9,9 +9,16 @@ class CalendrierController extends Controller
 
   function addDefi()
   {
+    $this->f3->set('mode', 'insert');
     $mapper = new Utilisateur($this->db);
     $victime = $mapper->getProfilSimple($this->f3->get('PARAMS.victime'));
     $auteur = $mapper->getProfilSimple($this->f3->get('PARAMS.auteur'));
+    $event = new Evenement($this->db);
+    $event->getEvent($this->f3->get('PARAMS.idEvent'));
+    if($event) {
+      $this->f3->set('event', $event);
+      $this->f3->set('mode', 'update');
+    }
 
     $this->f3->set('numeroJour', $this->f3->get('PARAMS.jour'));
     $this->f3->set('auteur', $auteur);
@@ -19,6 +26,14 @@ class CalendrierController extends Controller
     $this->f3->set('mode', 'ami');
     $this->f3->set('view', 'calendrierForm.html');
     $this->affichage();
+  }
+
+  function deleteDefi()
+  {
+    // ce serait cool de faire cette methode en ajax
+    $event = new Evenement($this->db);
+    $event->deleteDefi($this->f3->get('PARAMS.idEvent'));
+    $this->getCalendrierAmi();
   }
 
   function getCalendrierAmi()
@@ -35,7 +50,13 @@ class CalendrierController extends Controller
     foreach ($cal as  $event) 
     {
       $jours[$event['numeroJour']-1]['nbDefi'] = $jours[$event['numeroJour']-1]['nbDefi']+1 ;
-      $jours[$event['numeroJour']-1]['defis'][] = array('desc'=> $event['description'], 'auteur'=>$event['pseudoAuteur']);
+      $jours[$event['numeroJour']-1]['defis'][] = array('desc'=> $event['description'], 
+                                                        'auteur'=>$event['pseudoAuteur'],
+                                                        'idAuteur'=>$event['numero'],
+                                                        'isDone'=>$event['isDone'],
+                                                        'commentaireVictime'=>$event['comment'],
+                                                        'dateRealisation'=>$event['date'],
+                                                        'idEvent'=>$event['idEvenement']);
     }
     //echo "<pre>"; var_dump($jours); die;
     $this->f3->set('auteur', $this->f3->get('PARAMS.id'));

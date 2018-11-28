@@ -6,11 +6,15 @@ class Calendrier extends DB\SQL\Mapper {
 		parent::__construct($db,'evenements');
 	}
 
-
 	function getCalendrierAmi($id, $numero)
 	{
 
-		$requete ="SELECT day(evenements.jour) as numeroJour, evenements.*, realisations.*, participants.identifiant as pseudoAuteur, participants.numero ".
+		$requete ="SELECT day(evenements.jour) as numeroJour, ".
+					" evenements.idEvent as idEvenement, ".
+					" evenements.*, ".
+					" realisations.*,".
+					" participants.identifiant as pseudoAuteur,".
+					" participants.numero ".
 					" FROM evenements".
 					" left join realisations on realisations.idEvent = evenements.idEvent ".
 					" left join lienUsers lien1 on lien1.user1 = evenements.author".

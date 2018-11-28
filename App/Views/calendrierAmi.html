@@ -11,9 +11,26 @@
         <h5 class="card-title">{{ @infos['date'] }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ @infos['nbDefiTotal'] }} défis dont {{ @infos['nbDefi'] }}  fourni par votre groupe d'ami commun</h6>
         <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
-          <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}:  {{ @defi['desc'] }}</p>
+          <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}:  {{ @defi['desc'] }}
+            // {{@auteur}} // {{@defi['idAuteur']}}
+          <check if="{{ @auteur==@defi['idAuteur'] }}">
+              <true>
+                <a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}/{{ @defi['idEvent']}}">modifier</a>
+                <!-- il serait bien que la suppression soit en ajax -->
+                <!-- tout comme l'ajout / modification des défis -->
+                <a class="card-link" href="/deleteDefi/{{ @defi['idEvent']}}">supprimer ({{ @defi['idEvent']}})</a>                
+              </true>
+          </check>
+          </p>
+          <check if="{{ @defi['isDone'] == 'true'}}">
+              <true>
+              <h12> Le {{ @defi['dateRealisation'] }} :  {{ @defi['commentaireVictime'] }}  </h12>
+               </true>
+          </check>
         </repeat>
-        <a class="card-link" href="addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}">Ajouter un défi</a>
+        <p>
+        <a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}">Ajouter un défi</a>
+      </p>
       </div>
     </div>
   </repeat>	

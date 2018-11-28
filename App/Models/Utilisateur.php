@@ -45,7 +45,7 @@ class Utilisateur extends DB\SQL\Mapper {
 
 	function getProfil($id)
 	{
-		$participant = getProfilSimple($id);
+		$participant = $this->getProfilSimple($id);
 		$participant->amis = $this->getAmis($id);
 		return $participant;
 	}
