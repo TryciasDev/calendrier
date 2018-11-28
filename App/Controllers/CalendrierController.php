@@ -25,6 +25,7 @@ class CalendrierController extends Controller
   {
     $calendrier = new Calendrier($this->db);
     $jours = $this->prepareListDays();
+    $weekDays = $this->prepareListweekdays();
     $nbDefisTotal = $calendrier->getNbDefiByDay($this->f3->get('PARAMS.ami'));
     $cal = $calendrier->getCalendrierAmi($this->f3->get('PARAMS.ami'),$this->f3->get('PARAMS.id'));
     foreach ($nbDefisTotal as  $nb)
@@ -45,6 +46,10 @@ class CalendrierController extends Controller
     $this->affichage();
   }
 
+  function prepareListweekdays()
+  {
+	  return array(1,2,3,4,5,6,7);
+  }
   function prepareListDays()
   {
     $jours  = array();
