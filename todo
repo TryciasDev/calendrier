@@ -2,6 +2,10 @@ FAIT acheter nom de domaine & hébergement
 voir le souci de connexion
 voir le souci de session
 Mettre l'ajout/modification/suppression de défi en ajax ( ce sera moins lourd pour l'utilisateur et pour la navigation)
+	Encours ... affichage potentiellement prêt à tester (js à revoir probablement)
+	traitement de la requête ajax à valider
+Ajout de test JS avant submission
+	Encours à tester
 ajouter des pushs de notification pour prévenir les utilisateurs qu'ils ont n nouveaux challenge ce jour
 revoir la liste d'ami dans le profil (update et invite)
 voir pour l'internationalisation

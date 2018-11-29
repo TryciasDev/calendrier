@@ -33,6 +33,7 @@
 		    <label for="Nom" class="col-sm-2 col-form-label">Nom</label>
 		    <div class="col-sm-10">
 		      <input type="text" readonly class="form-control-plaintext" name="Nom" id="Nom" value="{{@datas->Nom}}">
+				<span id="NomErreur"></span>
 		    </div>
 		  </div>
 		<div class="form-group row">
@@ -65,7 +66,7 @@
 		<div class="input-group mb-3">
 		  <div class="input-group-prepend">
 		    <div class="input-group-text">
-		      <input type="checkbox" aria-label="Checkbox for following text input" value="{{@ami->numero}}">{{@ami->identifiant}}[{{@ami->nom}}]
+		      <input type="checkbox" aria-label="Checkbox for following text input" value="{{@ami->numero}}" name="amis">{{@ami->identifiant}}[{{@ami->nom}}]
 		    </div>
 		  </div>
 		</div>
