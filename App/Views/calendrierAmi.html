@@ -1,8 +1,17 @@
 <div class="jumbotron jumbotron-fluid text-center">
-		  <h1>Calendrier de {{@datas->identifiant}} ...</h1>
-		  <p>Ci dessous le calendrier de {{@datas->identifiant}} concoctée par toi et vos amis commun.</p>
+		  <h1>Calendrier de {{@ami->identifiant}} ...</h1>
+		  <p>Ci dessous le calendrier de {{@ami->identifiant}} concoctée par toi et vos amis commun.</p>
 		  <p>les défis, attentions, portée par des tiers absent de ton cercle ne sont te sont pas visible</p> 
 </div>
+<dialog id="confirmAddDefi">
+  <p>Avant de valider, êtes vous sûr que {{@datas->identifiant}} va apprécier ?</p>
+  <p>Est ce que votre surprise est en accord avec le message laisser par {{@ami->identifiant}} : {{@ami->Conditions}}<br> </p>
+  <input type="hidden" id="formId" value="">
+    <menu>
+      <button id="Cancel">Cancel</button>
+      <button id="go">Confirm</button>
+    </menu>
+</dialog>
 <div class="container-fluid">
   <!--repeat group="{{ @datas }}" value="{{ @jour }}" key="{{ @ikey }}"-->
   <repeat group="{{ @datas }}" key="{{ @jour }}" value="{{ @infos }}">
@@ -12,11 +21,10 @@
         <h6 class="card-subtitle mb-2 text-muted">{{ @infos['nbDefiTotal'] }} défis dont {{ @infos['nbDefi'] }}  fourni par votre groupe d'ami commun</h6>
         <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
           <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}: <span id="descDefi_{{ @jour+1}}"> {{ @defi['desc'] }}</span>
-            // {{@auteur}} // {{@defi['idAuteur']}}
           <check if="{{ @auteur==@defi['idAuteur'] }}">
               <true>
-                <a class="card-link" href="javascript:addDefi('{{ @jour+1 }}','{{ @defi['idEvent']}});">modifier</a>
-                <!--a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}/{{ @defi['idEvent']}}">modifier</a-->
+                <a class="card-link addDefi" data-jour="{{ @jour+1 }}" href="#" id="updateDefi{{@jour+1}}" data-idEvent="{{ @defi['idEvent']}}">modifier</a>
+                
                 <!-- il serait bien que la suppression soit en ajax -->
                 <!-- tout comme l'ajout / modification des défis -->
                 <a class="card-link" href="javascript:deleteDefi({{ @defi['idEvent']}})">supprimer ({{ @defi['idEvent']}})</a>                
@@ -30,20 +38,17 @@
           </check>
         </repeat>
         <p>
-	        <a class="card-link" href="/addDefi/{{ @auteur }}/{{ @ami }}/{{ @jour+1 }}">Ajouter un défi</a>
+	        <a class="card-link addDefi" id="addDefi{{ @jour+1 }}" data-jour="{{ @jour+1 }}" href="#">Ajouter un défi</a>
 			<div class="hide" id="addDefi_{{ @jour+1 }}">
-				<form method="Post" action="/addDefi/{{@auteur}}/{{ @ami }}/{{ @jour+1 }}" id="formulaire_{{ @jour+1 }}">
-					<input type="hidden" name="auteur" id="auteur_{{ @jour+1 }}" value="{{@auteur}}" />
-					<input type="hidden" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami}}" />
-					<input type="hidden" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
+				<form id="formulaire_{{ @jour+1 }}">
+					<input type="text" name="auteur" id="auteur_{{ @jour+1 }}" value="{{@auteur}}" />
+					<input type="text" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami->numero}}" />
+					<input type="text" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
 				  <div class="form-group">
 					<label for="defi">Défis</label>
 					<textarea class="form-control form-control-plaintext" id="defi_{{ @jour+1 }}" name="defi" rows="3" maxlength="250"></textarea>
 				  </div>
-				<button class="btn btn-primary" id="Save" data-toggle="modal" data-target="#confirmationDefi">Enregistrer</button>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-				  Launch demo modal
-				</button>	
+				<button class="btn btn-primary" id="Save_{{ @jour+1 }}" >Enregistrer</button>
 				</form>
 			</div>
       </p>
@@ -51,3 +56,75 @@
     </div>
   </repeat>	
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".hide").hide();
+  
+  <repeat group="{{ @datas }}" key="{{ @jour }}" value="{{ @infos }}">
+    $("#Save_{{ @jour+1 }}").click(function(){
+      $("#formId").val("formulaire_{{ @jour+1 }}");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/{{@auteur}}/{{@ami->numero}}/{{ @jour+1 }}";
+      if($("#idEvent_{{ @jour+1 }}").val() != '')
+      {
+        url = url+"/"+$("#idEvent_{{ @jour+1 }}").val();
+      }
+      var data = {auteurId:$("#auteur_{{ @jour+1 }}").val(), 
+                  victimeId:$("#victime_{{ @jour+1 }}").val(), 
+                  defi:$("#defi_{{ @jour+1 }}").val(), 
+                  idEvent:$("#idEvent_{{ @jour+1 }}").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi{{ @jour+1 }}").click(function(){
+      $("#idEvent_{{ @jour+1 }}").val('');
+      $("#defi_{{ @jour+1 }}").val('Ecrire ici');
+      $("#addDefi_{{ @jour+1 }}").show();
+    });
+      <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
+        $("#updateDefi{{@jour+1}}").click(function(){
+          $("#idEvent_{{ @jour+1 }}").val({{ @defi['idEvent']}});
+          $("#defi_{{ @jour+1 }}").val("{{ @defi['desc'] }}");
+          $("#addDefi_{{ @jour+1 }}").show();
+        });
+      </repeat>
+  </repeat>
+//prompt un message de confirmation que les conditions de la victime sont réalisés
+});
+</script>
+<!--script type="text/javascript" src="/../App/js/defi.add.js"></script-->

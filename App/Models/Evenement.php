@@ -22,6 +22,20 @@ class Evenement extends DB\SQL\Mapper {
 		$real->save();
 	}
 
+	function saveDefi($idAuteur, $idVictime, $desc, $jour, $idEvent = null)
+	{
+		$defi = new DB\SQL\Mapper($this->db, 'evenements');
+		if(!is_null($idEvent) || $idEvent != '')
+		{
+			$defi->load(array('idEvent = ?', $idEvent));
+		}
+		$defi->target = $idVictime;
+		$defit->author = $idAuteur;
+		$$defi->description = $desc;
+		$defi->jour = $jour;
+		
+	}
+
 	function deleteDefi($idEvent)
 	{
 		$defi = new DB\SQL\Mapper($this->db, 'evenements');

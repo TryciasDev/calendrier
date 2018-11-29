@@ -9,23 +9,36 @@ class CalendrierController extends Controller
 
   function addDefi()
   {
-    $this->f3->set('mode', 'insert');
+    //$this->f3->set('mode', 'insert');
+    $defi = $this->f3->get('POST.defi');
+    $victimeId = $this->f3->get('POST.victimeId');
+    $auteurId = $this->f3->get('POST.auteurId');
+    $idEvent = $this->f3->get('POST.idEvent');
+    $jour = $this->f3->get('PARAMS.jour');
+
+
     $mapper = new Utilisateur($this->db);
-    $victime = $mapper->getProfilSimple($this->f3->get('PARAMS.victime'));
-    $auteur = $mapper->getProfilSimple($this->f3->get('PARAMS.auteur'));
+    $victime = $mapper->getProfilSimple($victimeId);
+    $auteur = $mapper->getProfilSimple($auteurId);
     $event = new Evenement($this->db);
-    $event->getEvent($this->f3->get('PARAMS.idEvent'));
-    if($event) {
+    $jourCible = new DateTime('201812'.$jour);
+    $isSaved = $event->saveDefi($auteurId,$victimeId, $defi,$jourCible, $idEvent);
+    var_dump($isSaved);
+die;
+    $event->getEvent($isSaved->idEvent);
+
+/*
+    if($event != '') {
       $this->f3->set('event', $event);
       $this->f3->set('mode', 'update');
     }
-
-    $this->f3->set('numeroJour', $this->f3->get('PARAMS.jour'));
+    $this->f3->set('numeroJour', $jour);
     $this->f3->set('auteur', $auteur);
     $this->f3->set('victime', $victime);
     $this->f3->set('mode', 'ami');
     $this->f3->set('view', 'calendrierForm.html');
-    $this->affichage();
+*/
+  //  $this->affichage();
   }
 
   function deleteDefi()
@@ -39,10 +52,13 @@ class CalendrierController extends Controller
   function getCalendrierAmi()
   {
     $calendrier = new Calendrier($this->db);
+    $user = new Utilisateur($this->db);
+    $victimeId = $this->f3->get('PARAMS.ami');
+    $victime = $user->getProfilSimple($victimeId);
     $jours = $this->prepareListDays();
     $weekDays = $this->prepareListweekdays();
-    $nbDefisTotal = $calendrier->getNbDefiByDay($this->f3->get('PARAMS.ami'));
-    $cal = $calendrier->getCalendrierAmi($this->f3->get('PARAMS.ami'),$this->f3->get('PARAMS.id'));
+    $nbDefisTotal = $calendrier->getNbDefiByDay($victimeId);
+    $cal = $calendrier->getCalendrierAmi($victimeId,$this->f3->get('PARAMS.id'));
     foreach ($nbDefisTotal as  $nb)
     {
       $jours[$nb['numeroJour']-1]['nbDefiTotal'] = $nb['compteur'];
@@ -60,7 +76,7 @@ class CalendrierController extends Controller
     }
     //echo "<pre>"; var_dump($jours); die;
     $this->f3->set('auteur', $this->f3->get('PARAMS.id'));
-    $this->f3->set('ami', $this->f3->get('PARAMS.ami'));
+    $this->f3->set('ami', $victime);
     $this->f3->set('datas', $jours);
     $this->f3->set('mode', 'ami');
     $this->f3->set('view', 'calendrierAmi.html');

@@ -11,8 +11,12 @@ class Calendrier extends DB\SQL\Mapper {
 
 		$requete ="SELECT day(evenements.jour) as numeroJour, ".
 					" evenements.idEvent as idEvenement, ".
-					" evenements.*, ".
-					" realisations.*,".
+					" evenements.description, ".
+					" evenements.isDone, ".
+					" evenements.target as idVictime, ".
+					" evenements.author, ".
+					" realisations.comment,".
+					" realisations.date,".
 					" participants.identifiant as pseudoAuteur,".
 					" participants.numero ".
 					" FROM evenements".
@@ -22,6 +26,7 @@ class Calendrier extends DB\SQL\Mapper {
 					" join participants on participants.numero = evenements.author".
 					" WHERE target = :ami and (lien1.user2 = :user or lien2.user1 = :user or evenements.author = :user)".
 					" ORDER by evenements.jour";
+				//	echo $requete;
 		$params = array('ami'=>$id, 
 						'user' => $numero);
 		$listeEvent = $this->db->exec($requete, $params);
