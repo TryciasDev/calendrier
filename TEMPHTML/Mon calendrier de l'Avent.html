@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<!-- saved from url=(0112)http://example.test:8888/calendrierAmi/1/2?auteur=2&victime=1&idEvent=1&defi=C%27est+le+jour+UN+hip+hopxcbvxbcb# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mon Calendrier de l&#39;Avent">
+    <meta name="author" content="Patricia Trauman">
+    <script src="./Mon calendrier de l&#39;Avent_files/jquery.min.js"></script>
+    <title>Mon calendrier de l'Avent</title>
+    <link href="./Mon calendrier de l&#39;Avent_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Menu -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="http://example.test:8888/MonProfil/1">Mon Profil <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://example.test:8888/">Mon Calendrier</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mes amis</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown08">
+                            <a class="dropdown-item" href="http://example.test:8888/invite">Inviter un(e) ami(e)</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+<div class="jumbotron jumbotron-fluid text-center">
+		  <h1>Calendrier de Patedhdh ...</h1>
+		  <p>Ci dessous le calendrier de Patedhdh concoctée par toi et vos amis commun.</p>
+		  <p>les défis, attentions, portée par des tiers absent de ton cercle ne sont te sont pas visible</p> 
+</div>
+<dialog id="confirmAddDefi">
+  <p>Avant de valider, êtes vous sûr que  va apprécier ?</p>
+  <p>Est ce que votre surprise est en accord avec le message laisser par Patedhdh : Alors voilà.
+Pour le sport, il ne faut pas que le tout fasse plus de quinze minutes (hors weekend).
+Pour le reste, je laisse libre à votre imagination<br> </p>
+  <input type="hidden" id="formId" value="">
+    <menu>
+      <button id="Cancel">Cancel</button>
+      <button id="go">Confirm</button>
+    </menu>
+</dialog>
+<div class="container-fluid">
+  <!--repeat group="Array" value="" key=""-->
+      <div class="card" id="0">
+      <div class="card-body">
+        <h5 class="card-title">01/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">1 défis dont 1  fourni par votre groupe d'ami commun</h6>
+                  <p class="card-text">Défi #1 par test1: <span id="descDefi_1"> C'est le jour UN hip hop</span>
+                        
+                <a class="card-link addDefi" data-jour="1" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#" id="updateDefi1" data-idevent="1">modifier</a>
+                
+                <!-- il serait bien que la suppression soit en ajax -->
+                <!-- tout comme l'ajout / modification des défis -->
+                <a class="card-link" href="javascript:deleteDefi(1)">supprimer (1)</a>                
+              
+                    </p>
+                        
+              <h12> Le 2018-11-28 :  Trop marrant merci bidule.
+J'ai adoré parce que ...  </h12>
+               
+                          <p>
+	        <a class="card-link addDefi" id="addDefi1" data-jour="1" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_1" style="display: none;">
+				<form id="formulaire_1">
+					<input type="text" name="auteur" id="auteur_1" value="2">
+					<input type="text" name="victime" id="victime_1" value="1">
+					<input type="text" name="idEvent" id="idEvent_1" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_1" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_1">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="1">
+      <div class="card-body">
+        <h5 class="card-title">02/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">1 défis dont 1  fourni par votre groupe d'ami commun</h6>
+                  <p class="card-text">Défi #1 par test2: <span id="descDefi_2"> AHAHAHAH</span>
+                    </p>
+                          <p>
+	        <a class="card-link addDefi" id="addDefi2" data-jour="2" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_2" style="display: none;">
+				<form id="formulaire_2">
+					<input type="text" name="auteur" id="auteur_2" value="2">
+					<input type="text" name="victime" id="victime_2" value="1">
+					<input type="text" name="idEvent" id="idEvent_2" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_2" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_2">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="2">
+      <div class="card-body">
+        <h5 class="card-title">03/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi3" data-jour="3" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_3" style="display: none;">
+				<form id="formulaire_3">
+					<input type="text" name="auteur" id="auteur_3" value="2">
+					<input type="text" name="victime" id="victime_3" value="1">
+					<input type="text" name="idEvent" id="idEvent_3" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_3" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_3">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="3">
+      <div class="card-body">
+        <h5 class="card-title">04/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi4" data-jour="4" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_4" style="display: none;">
+				<form id="formulaire_4">
+					<input type="text" name="auteur" id="auteur_4" value="2">
+					<input type="text" name="victime" id="victime_4" value="1">
+					<input type="text" name="idEvent" id="idEvent_4" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_4" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_4">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="4">
+      <div class="card-body">
+        <h5 class="card-title">05/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi5" data-jour="5" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_5" style="display: none;">
+				<form id="formulaire_5">
+					<input type="text" name="auteur" id="auteur_5" value="2">
+					<input type="text" name="victime" id="victime_5" value="1">
+					<input type="text" name="idEvent" id="idEvent_5" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_5" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_5">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="5">
+      <div class="card-body">
+        <h5 class="card-title">06/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi6" data-jour="6" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_6" style="display: none;">
+				<form id="formulaire_6">
+					<input type="text" name="auteur" id="auteur_6" value="2">
+					<input type="text" name="victime" id="victime_6" value="1">
+					<input type="text" name="idEvent" id="idEvent_6" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_6" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_6">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="6">
+      <div class="card-body">
+        <h5 class="card-title">07/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi7" data-jour="7" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_7" style="display: none;">
+				<form id="formulaire_7">
+					<input type="text" name="auteur" id="auteur_7" value="2">
+					<input type="text" name="victime" id="victime_7" value="1">
+					<input type="text" name="idEvent" id="idEvent_7" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_7" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_7">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="7">
+      <div class="card-body">
+        <h5 class="card-title">08/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi8" data-jour="8" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_8" style="display: none;">
+				<form id="formulaire_8">
+					<input type="text" name="auteur" id="auteur_8" value="2">
+					<input type="text" name="victime" id="victime_8" value="1">
+					<input type="text" name="idEvent" id="idEvent_8" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_8" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_8">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="8">
+      <div class="card-body">
+        <h5 class="card-title">09/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi9" data-jour="9" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_9" style="display: none;">
+				<form id="formulaire_9">
+					<input type="text" name="auteur" id="auteur_9" value="2">
+					<input type="text" name="victime" id="victime_9" value="1">
+					<input type="text" name="idEvent" id="idEvent_9" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_9" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_9">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="9">
+      <div class="card-body">
+        <h5 class="card-title">10/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi10" data-jour="10" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_10" style="display: none;">
+				<form id="formulaire_10">
+					<input type="text" name="auteur" id="auteur_10" value="2">
+					<input type="text" name="victime" id="victime_10" value="1">
+					<input type="text" name="idEvent" id="idEvent_10" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_10" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_10">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="10">
+      <div class="card-body">
+        <h5 class="card-title">11/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi11" data-jour="11" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_11" style="display: none;">
+				<form id="formulaire_11">
+					<input type="text" name="auteur" id="auteur_11" value="2">
+					<input type="text" name="victime" id="victime_11" value="1">
+					<input type="text" name="idEvent" id="idEvent_11" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_11" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_11">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="11">
+      <div class="card-body">
+        <h5 class="card-title">12/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi12" data-jour="12" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_12" style="display: none;">
+				<form id="formulaire_12">
+					<input type="text" name="auteur" id="auteur_12" value="2">
+					<input type="text" name="victime" id="victime_12" value="1">
+					<input type="text" name="idEvent" id="idEvent_12" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_12" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_12">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="12">
+      <div class="card-body">
+        <h5 class="card-title">13/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi13" data-jour="13" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_13" style="display: none;">
+				<form id="formulaire_13">
+					<input type="text" name="auteur" id="auteur_13" value="2">
+					<input type="text" name="victime" id="victime_13" value="1">
+					<input type="text" name="idEvent" id="idEvent_13" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_13" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_13">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="13">
+      <div class="card-body">
+        <h5 class="card-title">14/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi14" data-jour="14" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_14" style="display: none;">
+				<form id="formulaire_14">
+					<input type="text" name="auteur" id="auteur_14" value="2">
+					<input type="text" name="victime" id="victime_14" value="1">
+					<input type="text" name="idEvent" id="idEvent_14" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_14" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_14">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="14">
+      <div class="card-body">
+        <h5 class="card-title">15/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi15" data-jour="15" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_15" style="display: none;">
+				<form id="formulaire_15">
+					<input type="text" name="auteur" id="auteur_15" value="2">
+					<input type="text" name="victime" id="victime_15" value="1">
+					<input type="text" name="idEvent" id="idEvent_15" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_15" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_15">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="15">
+      <div class="card-body">
+        <h5 class="card-title">16/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi16" data-jour="16" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_16" style="display: none;">
+				<form id="formulaire_16">
+					<input type="text" name="auteur" id="auteur_16" value="2">
+					<input type="text" name="victime" id="victime_16" value="1">
+					<input type="text" name="idEvent" id="idEvent_16" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_16" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_16">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="16">
+      <div class="card-body">
+        <h5 class="card-title">17/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi17" data-jour="17" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_17" style="display: none;">
+				<form id="formulaire_17">
+					<input type="text" name="auteur" id="auteur_17" value="2">
+					<input type="text" name="victime" id="victime_17" value="1">
+					<input type="text" name="idEvent" id="idEvent_17" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_17" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_17">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="17">
+      <div class="card-body">
+        <h5 class="card-title">18/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi18" data-jour="18" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_18" style="display: none;">
+				<form id="formulaire_18">
+					<input type="text" name="auteur" id="auteur_18" value="2">
+					<input type="text" name="victime" id="victime_18" value="1">
+					<input type="text" name="idEvent" id="idEvent_18" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_18" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_18">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="18">
+      <div class="card-body">
+        <h5 class="card-title">19/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi19" data-jour="19" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_19" style="display: none;">
+				<form id="formulaire_19">
+					<input type="text" name="auteur" id="auteur_19" value="2">
+					<input type="text" name="victime" id="victime_19" value="1">
+					<input type="text" name="idEvent" id="idEvent_19" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_19" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_19">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="19">
+      <div class="card-body">
+        <h5 class="card-title">20/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi20" data-jour="20" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_20" style="display: none;">
+				<form id="formulaire_20">
+					<input type="text" name="auteur" id="auteur_20" value="2">
+					<input type="text" name="victime" id="victime_20" value="1">
+					<input type="text" name="idEvent" id="idEvent_20" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_20" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_20">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="20">
+      <div class="card-body">
+        <h5 class="card-title">21/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">0 défis dont 0  fourni par votre groupe d'ami commun</h6>
+                <p>
+	        <a class="card-link addDefi" id="addDefi21" data-jour="21" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_21" style="display: none;">
+				<form id="formulaire_21">
+					<input type="text" name="auteur" id="auteur_21" value="2">
+					<input type="text" name="victime" id="victime_21" value="1">
+					<input type="text" name="idEvent" id="idEvent_21" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_21" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_21">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="21">
+      <div class="card-body">
+        <h5 class="card-title">22/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">2 défis dont 1  fourni par votre groupe d'ami commun</h6>
+                  <p class="card-text">Défi #1 par test1: <span id="descDefi_22"> AHAHAHAH</span>
+                        
+                <a class="card-link addDefi" data-jour="22" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#" id="updateDefi22" data-idevent="4">modifier</a>
+                
+                <!-- il serait bien que la suppression soit en ajax -->
+                <!-- tout comme l'ajout / modification des défis -->
+                <a class="card-link" href="javascript:deleteDefi(4)">supprimer (4)</a>                
+              
+                    </p>
+                          <p>
+	        <a class="card-link addDefi" id="addDefi22" data-jour="22" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_22" style="display: none;">
+				<form id="formulaire_22">
+					<input type="text" name="auteur" id="auteur_22" value="2">
+					<input type="text" name="victime" id="victime_22" value="1">
+					<input type="text" name="idEvent" id="idEvent_22" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_22" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_22">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="22">
+      <div class="card-body">
+        <h5 class="card-title">23/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">1 défis dont 1  fourni par votre groupe d'ami commun</h6>
+                  <p class="card-text">Défi #1 par test2: <span id="descDefi_23"> AHAHAHAH</span>
+                    </p>
+                          <p>
+	        <a class="card-link addDefi" id="addDefi23" data-jour="23" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_23" style="display: none;">
+				<form id="formulaire_23">
+					<input type="text" name="auteur" id="auteur_23" value="2">
+					<input type="text" name="victime" id="victime_23" value="1">
+					<input type="text" name="idEvent" id="idEvent_23" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_23" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_23">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+      <div class="card" id="23">
+      <div class="card-body">
+        <h5 class="card-title">24/12/2018</h5>
+        <h6 class="card-subtitle mb-2 text-muted">2 défis dont 2  fourni par votre groupe d'ami commun</h6>
+                  <p class="card-text">Défi #1 par test2: <span id="descDefi_24"> AHAHAHAH</span>
+                    </p>
+                            <p class="card-text">Défi #2 par test1: <span id="descDefi_24"> C'est le jour UN tralalala</span>
+                        
+                <a class="card-link addDefi" data-jour="24" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#" id="updateDefi24" data-idevent="7">modifier</a>
+                
+                <!-- il serait bien que la suppression soit en ajax -->
+                <!-- tout comme l'ajout / modification des défis -->
+                <a class="card-link" href="javascript:deleteDefi(7)">supprimer (7)</a>                
+              
+                    </p>
+                          <p>
+	        <a class="card-link addDefi" id="addDefi24" data-jour="24" href="http://example.test:8888/calendrierAmi/1/2?auteur=2&amp;victime=1&amp;idEvent=1&amp;defi=C%27est+le+jour+UN+hip+hopxcbvxbcb#">Ajouter un défi</a>
+			</p><div class="hide" id="addDefi_24" style="display: none;">
+				<form id="formulaire_24">
+					<input type="text" name="auteur" id="auteur_24" value="2">
+					<input type="text" name="victime" id="victime_24" value="1">
+					<input type="text" name="idEvent" id="idEvent_24" value="">
+				  <div class="form-group">
+					<label for="defi">Défis</label>
+					<textarea class="form-control form-control-plaintext" id="defi_24" name="defi" rows="3" maxlength="250"></textarea>
+				  </div>
+				<button class="btn btn-primary" id="Save_24">Enregistrer</button>
+				</form>
+			</div>
+      <p></p>
+      </div>
+    </div>
+  	
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".hide").hide();
+  
+      $("#Save_1").click(function(){
+      $("#formId").val("formulaire_1");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/1";
+      if($("#idEvent_1").val() != '')
+      {
+        url = url+"/"+$("#idEvent_1").val();
+      }
+      var data = {auteurId:$("#auteur_1").val(), 
+                  victimeId:$("#victime_1").val(), 
+                  defi:$("#defi_1").val(), 
+                  idEvent:$("#idEvent_1").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi1").click(function(){
+      $("#idEvent_1").val('');
+      $("#defi_1").val('Ecrire ici');
+      $("#addDefi_1").show();
+    });
+              $("#updateDefi1").click(function(){
+          $("#idEvent_1").val(1);
+          $("#defi_1").val("C'est le jour UN hip hop");
+          $("#addDefi_1").show();
+        });
+            $("#Save_2").click(function(){
+      $("#formId").val("formulaire_2");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/2";
+      if($("#idEvent_2").val() != '')
+      {
+        url = url+"/"+$("#idEvent_2").val();
+      }
+      var data = {auteurId:$("#auteur_2").val(), 
+                  victimeId:$("#victime_2").val(), 
+                  defi:$("#defi_2").val(), 
+                  idEvent:$("#idEvent_2").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi2").click(function(){
+      $("#idEvent_2").val('');
+      $("#defi_2").val('Ecrire ici');
+      $("#addDefi_2").show();
+    });
+              $("#updateDefi2").click(function(){
+          $("#idEvent_2").val(2);
+          $("#defi_2").val("AHAHAHAH");
+          $("#addDefi_2").show();
+        });
+            $("#Save_3").click(function(){
+      $("#formId").val("formulaire_3");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/3";
+      if($("#idEvent_3").val() != '')
+      {
+        url = url+"/"+$("#idEvent_3").val();
+      }
+      var data = {auteurId:$("#auteur_3").val(), 
+                  victimeId:$("#victime_3").val(), 
+                  defi:$("#defi_3").val(), 
+                  idEvent:$("#idEvent_3").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi3").click(function(){
+      $("#idEvent_3").val('');
+      $("#defi_3").val('Ecrire ici');
+      $("#addDefi_3").show();
+    });
+            $("#Save_4").click(function(){
+      $("#formId").val("formulaire_4");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/4";
+      if($("#idEvent_4").val() != '')
+      {
+        url = url+"/"+$("#idEvent_4").val();
+      }
+      var data = {auteurId:$("#auteur_4").val(), 
+                  victimeId:$("#victime_4").val(), 
+                  defi:$("#defi_4").val(), 
+                  idEvent:$("#idEvent_4").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi4").click(function(){
+      $("#idEvent_4").val('');
+      $("#defi_4").val('Ecrire ici');
+      $("#addDefi_4").show();
+    });
+            $("#Save_5").click(function(){
+      $("#formId").val("formulaire_5");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/5";
+      if($("#idEvent_5").val() != '')
+      {
+        url = url+"/"+$("#idEvent_5").val();
+      }
+      var data = {auteurId:$("#auteur_5").val(), 
+                  victimeId:$("#victime_5").val(), 
+                  defi:$("#defi_5").val(), 
+                  idEvent:$("#idEvent_5").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi5").click(function(){
+      $("#idEvent_5").val('');
+      $("#defi_5").val('Ecrire ici');
+      $("#addDefi_5").show();
+    });
+            $("#Save_6").click(function(){
+      $("#formId").val("formulaire_6");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/6";
+      if($("#idEvent_6").val() != '')
+      {
+        url = url+"/"+$("#idEvent_6").val();
+      }
+      var data = {auteurId:$("#auteur_6").val(), 
+                  victimeId:$("#victime_6").val(), 
+                  defi:$("#defi_6").val(), 
+                  idEvent:$("#idEvent_6").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi6").click(function(){
+      $("#idEvent_6").val('');
+      $("#defi_6").val('Ecrire ici');
+      $("#addDefi_6").show();
+    });
+            $("#Save_7").click(function(){
+      $("#formId").val("formulaire_7");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/7";
+      if($("#idEvent_7").val() != '')
+      {
+        url = url+"/"+$("#idEvent_7").val();
+      }
+      var data = {auteurId:$("#auteur_7").val(), 
+                  victimeId:$("#victime_7").val(), 
+                  defi:$("#defi_7").val(), 
+                  idEvent:$("#idEvent_7").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi7").click(function(){
+      $("#idEvent_7").val('');
+      $("#defi_7").val('Ecrire ici');
+      $("#addDefi_7").show();
+    });
+            $("#Save_8").click(function(){
+      $("#formId").val("formulaire_8");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/8";
+      if($("#idEvent_8").val() != '')
+      {
+        url = url+"/"+$("#idEvent_8").val();
+      }
+      var data = {auteurId:$("#auteur_8").val(), 
+                  victimeId:$("#victime_8").val(), 
+                  defi:$("#defi_8").val(), 
+                  idEvent:$("#idEvent_8").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi8").click(function(){
+      $("#idEvent_8").val('');
+      $("#defi_8").val('Ecrire ici');
+      $("#addDefi_8").show();
+    });
+            $("#Save_9").click(function(){
+      $("#formId").val("formulaire_9");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/9";
+      if($("#idEvent_9").val() != '')
+      {
+        url = url+"/"+$("#idEvent_9").val();
+      }
+      var data = {auteurId:$("#auteur_9").val(), 
+                  victimeId:$("#victime_9").val(), 
+                  defi:$("#defi_9").val(), 
+                  idEvent:$("#idEvent_9").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi9").click(function(){
+      $("#idEvent_9").val('');
+      $("#defi_9").val('Ecrire ici');
+      $("#addDefi_9").show();
+    });
+            $("#Save_10").click(function(){
+      $("#formId").val("formulaire_10");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/10";
+      if($("#idEvent_10").val() != '')
+      {
+        url = url+"/"+$("#idEvent_10").val();
+      }
+      var data = {auteurId:$("#auteur_10").val(), 
+                  victimeId:$("#victime_10").val(), 
+                  defi:$("#defi_10").val(), 
+                  idEvent:$("#idEvent_10").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi10").click(function(){
+      $("#idEvent_10").val('');
+      $("#defi_10").val('Ecrire ici');
+      $("#addDefi_10").show();
+    });
+            $("#Save_11").click(function(){
+      $("#formId").val("formulaire_11");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/11";
+      if($("#idEvent_11").val() != '')
+      {
+        url = url+"/"+$("#idEvent_11").val();
+      }
+      var data = {auteurId:$("#auteur_11").val(), 
+                  victimeId:$("#victime_11").val(), 
+                  defi:$("#defi_11").val(), 
+                  idEvent:$("#idEvent_11").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi11").click(function(){
+      $("#idEvent_11").val('');
+      $("#defi_11").val('Ecrire ici');
+      $("#addDefi_11").show();
+    });
+            $("#Save_12").click(function(){
+      $("#formId").val("formulaire_12");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/12";
+      if($("#idEvent_12").val() != '')
+      {
+        url = url+"/"+$("#idEvent_12").val();
+      }
+      var data = {auteurId:$("#auteur_12").val(), 
+                  victimeId:$("#victime_12").val(), 
+                  defi:$("#defi_12").val(), 
+                  idEvent:$("#idEvent_12").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi12").click(function(){
+      $("#idEvent_12").val('');
+      $("#defi_12").val('Ecrire ici');
+      $("#addDefi_12").show();
+    });
+            $("#Save_13").click(function(){
+      $("#formId").val("formulaire_13");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/13";
+      if($("#idEvent_13").val() != '')
+      {
+        url = url+"/"+$("#idEvent_13").val();
+      }
+      var data = {auteurId:$("#auteur_13").val(), 
+                  victimeId:$("#victime_13").val(), 
+                  defi:$("#defi_13").val(), 
+                  idEvent:$("#idEvent_13").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi13").click(function(){
+      $("#idEvent_13").val('');
+      $("#defi_13").val('Ecrire ici');
+      $("#addDefi_13").show();
+    });
+            $("#Save_14").click(function(){
+      $("#formId").val("formulaire_14");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/14";
+      if($("#idEvent_14").val() != '')
+      {
+        url = url+"/"+$("#idEvent_14").val();
+      }
+      var data = {auteurId:$("#auteur_14").val(), 
+                  victimeId:$("#victime_14").val(), 
+                  defi:$("#defi_14").val(), 
+                  idEvent:$("#idEvent_14").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi14").click(function(){
+      $("#idEvent_14").val('');
+      $("#defi_14").val('Ecrire ici');
+      $("#addDefi_14").show();
+    });
+            $("#Save_15").click(function(){
+      $("#formId").val("formulaire_15");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/15";
+      if($("#idEvent_15").val() != '')
+      {
+        url = url+"/"+$("#idEvent_15").val();
+      }
+      var data = {auteurId:$("#auteur_15").val(), 
+                  victimeId:$("#victime_15").val(), 
+                  defi:$("#defi_15").val(), 
+                  idEvent:$("#idEvent_15").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi15").click(function(){
+      $("#idEvent_15").val('');
+      $("#defi_15").val('Ecrire ici');
+      $("#addDefi_15").show();
+    });
+            $("#Save_16").click(function(){
+      $("#formId").val("formulaire_16");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/16";
+      if($("#idEvent_16").val() != '')
+      {
+        url = url+"/"+$("#idEvent_16").val();
+      }
+      var data = {auteurId:$("#auteur_16").val(), 
+                  victimeId:$("#victime_16").val(), 
+                  defi:$("#defi_16").val(), 
+                  idEvent:$("#idEvent_16").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi16").click(function(){
+      $("#idEvent_16").val('');
+      $("#defi_16").val('Ecrire ici');
+      $("#addDefi_16").show();
+    });
+            $("#Save_17").click(function(){
+      $("#formId").val("formulaire_17");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/17";
+      if($("#idEvent_17").val() != '')
+      {
+        url = url+"/"+$("#idEvent_17").val();
+      }
+      var data = {auteurId:$("#auteur_17").val(), 
+                  victimeId:$("#victime_17").val(), 
+                  defi:$("#defi_17").val(), 
+                  idEvent:$("#idEvent_17").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi17").click(function(){
+      $("#idEvent_17").val('');
+      $("#defi_17").val('Ecrire ici');
+      $("#addDefi_17").show();
+    });
+            $("#Save_18").click(function(){
+      $("#formId").val("formulaire_18");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/18";
+      if($("#idEvent_18").val() != '')
+      {
+        url = url+"/"+$("#idEvent_18").val();
+      }
+      var data = {auteurId:$("#auteur_18").val(), 
+                  victimeId:$("#victime_18").val(), 
+                  defi:$("#defi_18").val(), 
+                  idEvent:$("#idEvent_18").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi18").click(function(){
+      $("#idEvent_18").val('');
+      $("#defi_18").val('Ecrire ici');
+      $("#addDefi_18").show();
+    });
+            $("#Save_19").click(function(){
+      $("#formId").val("formulaire_19");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/19";
+      if($("#idEvent_19").val() != '')
+      {
+        url = url+"/"+$("#idEvent_19").val();
+      }
+      var data = {auteurId:$("#auteur_19").val(), 
+                  victimeId:$("#victime_19").val(), 
+                  defi:$("#defi_19").val(), 
+                  idEvent:$("#idEvent_19").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi19").click(function(){
+      $("#idEvent_19").val('');
+      $("#defi_19").val('Ecrire ici');
+      $("#addDefi_19").show();
+    });
+            $("#Save_20").click(function(){
+      $("#formId").val("formulaire_20");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/20";
+      if($("#idEvent_20").val() != '')
+      {
+        url = url+"/"+$("#idEvent_20").val();
+      }
+      var data = {auteurId:$("#auteur_20").val(), 
+                  victimeId:$("#victime_20").val(), 
+                  defi:$("#defi_20").val(), 
+                  idEvent:$("#idEvent_20").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi20").click(function(){
+      $("#idEvent_20").val('');
+      $("#defi_20").val('Ecrire ici');
+      $("#addDefi_20").show();
+    });
+            $("#Save_21").click(function(){
+      $("#formId").val("formulaire_21");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/21";
+      if($("#idEvent_21").val() != '')
+      {
+        url = url+"/"+$("#idEvent_21").val();
+      }
+      var data = {auteurId:$("#auteur_21").val(), 
+                  victimeId:$("#victime_21").val(), 
+                  defi:$("#defi_21").val(), 
+                  idEvent:$("#idEvent_21").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi21").click(function(){
+      $("#idEvent_21").val('');
+      $("#defi_21").val('Ecrire ici');
+      $("#addDefi_21").show();
+    });
+            $("#Save_22").click(function(){
+      $("#formId").val("formulaire_22");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/22";
+      if($("#idEvent_22").val() != '')
+      {
+        url = url+"/"+$("#idEvent_22").val();
+      }
+      var data = {auteurId:$("#auteur_22").val(), 
+                  victimeId:$("#victime_22").val(), 
+                  defi:$("#defi_22").val(), 
+                  idEvent:$("#idEvent_22").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi22").click(function(){
+      $("#idEvent_22").val('');
+      $("#defi_22").val('Ecrire ici');
+      $("#addDefi_22").show();
+    });
+              $("#updateDefi22").click(function(){
+          $("#idEvent_22").val(4);
+          $("#defi_22").val("AHAHAHAH");
+          $("#addDefi_22").show();
+        });
+            $("#Save_23").click(function(){
+      $("#formId").val("formulaire_23");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/23";
+      if($("#idEvent_23").val() != '')
+      {
+        url = url+"/"+$("#idEvent_23").val();
+      }
+      var data = {auteurId:$("#auteur_23").val(), 
+                  victimeId:$("#victime_23").val(), 
+                  defi:$("#defi_23").val(), 
+                  idEvent:$("#idEvent_23").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi23").click(function(){
+      $("#idEvent_23").val('');
+      $("#defi_23").val('Ecrire ici');
+      $("#addDefi_23").show();
+    });
+              $("#updateDefi23").click(function(){
+          $("#idEvent_23").val(6);
+          $("#defi_23").val("AHAHAHAH");
+          $("#addDefi_23").show();
+        });
+            $("#Save_24").click(function(){
+      $("#formId").val("formulaire_24");
+//TODO mettre en place la popup de confirmation peut se faire hors ligne
+//      $("#confirmAddDefi").show();
+      var url = "/addDefi/2/1/24";
+      if($("#idEvent_24").val() != '')
+      {
+        url = url+"/"+$("#idEvent_24").val();
+      }
+      var data = {auteurId:$("#auteur_24").val(), 
+                  victimeId:$("#victime_24").val(), 
+                  defi:$("#defi_24").val(), 
+                  idEvent:$("#idEvent_24").val()}
+                  ;
+      alert(url);
+      /*
+      var posting = $.post( url, data );
+      posting.done(function( data ) {
+        alert('success');
+      });/**/
+      $.post({url: url,
+             // method = "POST",
+              data: data,
+           /*   statusCode: {
+                  404: function() {
+                    alert( "page not found" );
+                  }
+                  503: function() {
+                    alert( "forbidden" );
+                  }
+                  200: function() {
+                    alert( "fine" );
+                  }
+                },*/
+               success: function(result){
+             // $("#div1").html(result);
+             alert('SUCCESS : '+result);
+          }})
+        .done(function(){
+            alert("test : Done");
+          })
+        .fail(function() {
+            alert( "error" );
+          })
+        .always(function() {
+            alert( "complete" );
+          })
+        ;
+
+    });
+    $("#addDefi24").click(function(){
+      $("#idEvent_24").val('');
+      $("#defi_24").val('Ecrire ici');
+      $("#addDefi_24").show();
+    });
+              $("#updateDefi24").click(function(){
+          $("#idEvent_24").val(8);
+          $("#defi_24").val("AHAHAHAH");
+          $("#addDefi_24").show();
+        });
+              $("#updateDefi24").click(function(){
+          $("#idEvent_24").val(7);
+          $("#defi_24").val("C'est le jour UN tralalala");
+          $("#addDefi_24").show();
+        });
+        //prompt un message de confirmation que les conditions de la victime sont réalisés
+});
+</script>
+<!--script type="text/javascript" src="/../App/js/defi.add.js"></script-->    <script src="./Mon calendrier de l&#39;Avent_files/bootstrap.min.js"></script>
+    <script src="./Mon calendrier de l&#39;Avent_files/bootstrap.bundle.min.js"></script>
+  
+  </body></html>
