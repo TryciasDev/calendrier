@@ -1,12 +1,12 @@
 <div class="jumbotron jumbotron-fluid text-center">
 	<check if="{{ @mode=='update' }}">
     <true>
-		  <h1>Mon Profil {{@datas->identifiant}} ...</h1>
+		  <h1>Mon Profil {{@datas->pseudo}} ...</h1>
 		  <p>Tes amis peuvent te laisser des défi, toutefois tu peux leur donner des idées ou des contraintes.</p>
 		  <p>ex: Tu peux interdire tout défi sur ton lieu de travail ou  donner une autre limite de temps par exemple</p> 
     </true>
     <false>
-		  <h1>{{@datas->identifiant}}, tu souhaites qu'un ami nous rejoigne ? Inscrit le</h1>
+		  <h1>{{@datas->pseudo}}, tu souhaites qu'un ami nous rejoigne ? Inscrit le</h1>
 		  <p>Son compte ne sera actif qu'après modificaiton de son mot de passe</p> 
 		  <p>Ne te trompes pas dans son adresse mail si tu veux qu'il reçoive l'invitation</p> 
     </false>
@@ -16,7 +16,7 @@
 
 	<check if="{{ @mode=='update' }}">
     <true>
-	<form method="Post" action="/MonProfil/{{@datas->numero}}" id="formulaire">
+	<form method="Post" action="/MonProfil/{{@datas->uid}}" id="formulaire">
     </true>
     <false>
 	<form method="Post" action="/invite" id="formulaire">
@@ -25,27 +25,29 @@
 		<div class="form-group row">
 		    <label for="staticPseudo" class="col-sm-2 col-form-label">Pseudo</label>
 		    <div class="col-sm-10">
-		      <input type="hidden" readonly name="numero" value="{{@datas->numero}}">
-		      <input type="text" readonly class="form-control-plaintext" name="Pseudo" id="staticPseudo" value="{{@datas->identifiant}}">
+		      <input type="hidden" readonly name="uid" value="{{@datas->uid}}">
+		      <input type="text" readonly class="form-control-plaintext" name="Pseudo" id="staticPseudo" value="{{@datas->pseudo}}">
 		    </div>
 		  </div>		
 		<div class="form-group row">
 		    <label for="Nom" class="col-sm-2 col-form-label">Nom</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" name="Nom" id="Nom" value="{{@datas->Nom}}">
-				<span id="NomErreur"></span>
+		      <input type="text" readonly class="form-control" name="Nom" id="Nom" value="{{@datas->Nom}}">
+				<span id="NomErreur" class="form-control-danger"></span>
 		    </div>
 		  </div>
 		<div class="form-group row">
 		    <label for="Prenom" class="col-sm-2 col-form-label">Prénom</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" name="Prenom" id="Prenom" value="{{@datas->Prenom}}">
+		      <input type="text" readonly class="form-control" name="Prenom" id="Prenom" value="{{@datas->Prenom}}">
+				<span id="PrenomErreur" class="form-control-danger"></span>
 		    </div>
 		  </div>
 		<div class="form-group row">
 		    <label for="Email" class="col-sm-2 col-form-label">Email</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" name="email" id="Email" value="{{@datas->email}}">
+		      <input type="text" readonly class="form-control" name="email" id="Email" value="{{@datas->email}}">
+				<span id="EmailErreur" class="form-control-danger"></span>
 		    </div>
 		  </div>
 	<check if="{{ @mode=='update' }}">
@@ -62,11 +64,11 @@
 			  </div>
 	    </false>
 	</check>
-	<repeat group="{{@datas->amis}}" value="{{@ami}}">
+	<repeat group="{{@amis}}" value="{{@ami}}" key="{{@cle}}">
 		<div class="input-group mb-3">
 		  <div class="input-group-prepend">
 		    <div class="input-group-text">
-		      <input type="checkbox" aria-label="Checkbox for following text input" value="{{@ami->numero}}" name="amis">{{@ami->identifiant}}[{{@ami->nom}}]
+		      <input type="checkbox" aria-label="Checkbox for following text input" value="{{@ami['uid']}}" checked name="amis">{{@ami['pseudo']}}[{{@ami['prenom']}}]
 		    </div>
 		  </div>
 		</div>

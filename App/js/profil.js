@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$("#Save").click(function() {
 		//$("#formulaire").validate();
 		//Vérifier qu'il y a au moins un amis de sélectionner si amis il y a
-		$(//trouver selecteur sur le nom ou voir si jquery n'a pas un truc spécial checkbox 
+		//$(//trouver selecteur sur le nom ou voir si jquery n'a pas un truc spécial checkbox 
 		if($("#Prenom").val() == undefined || $("#Prenom").val().trim() == "")
 		{
 			alert('Le prénom est obligatoire');
@@ -13,9 +13,13 @@ $(document).ready(function(){
 		{
 			$("#NomErreur").text('Le nom est obligatoire');
 			$("#NomErreur").show();
+			$("#Nom").addClass('form-control-success');
+			$("#Nom").removeClass('form-control-danger');
 		} else {
 			$("#NomErreur").text(''); 
 			$("#NomErreur").hide();
+			$("#Nom").removeClass('form-control-danger');
+			$("#Nom").addClass('form-control-success');
 		}
 	});
 	$("#Email").focusout(function(){

@@ -8,7 +8,7 @@ class Evenement extends DB\SQL\Mapper {
 
 	// Specialized query
 	function listBydayAndVictim($day,$victime) {
-		return $this->find(array('day(jour) = ? and target = ?', $day, $victime));
+		return $this->find(array('day(jour) = ? and victime = ?', $day, $victime));
 	}
 	function getEvent($idEvent) {
 		if(is_null($idEvent)) return false;
@@ -18,7 +18,6 @@ class Evenement extends DB\SQL\Mapper {
 	{
 		$real = new DB\SQL\Mapper($this->db, 'evenements');
 		$real->idEvent = $idEvent;
-		$real->isDone = $isDone;
 		$real->save();
 	}
 
@@ -29,11 +28,20 @@ class Evenement extends DB\SQL\Mapper {
 		{
 			$defi->load(array('idEvent = ?', $idEvent));
 		}
-		$defi->target = $idVictime;
-		$defit->author = $idAuteur;
-		$$defi->description = $desc;
-		$defi->jour = $jour;
-		
+		$defi->victime = $idVictime;
+		$defi->auteur = $idAuteur;
+		$defi->description = $desc;
+		$defi->jour = $jour->format('Y-m-d');
+		$defi->save();
+		if(is_null($idEvent))
+		{
+			$defi->idEvent = $defi->get('idEvent');
+		}
+//		$defi->load(array('idEvent = ?', $idEvent));
+//		var_dump($idEvent);
+//		var_dump($defi->idEvent);
+//		die;
+		return $this->getEvent($defi->idEvent);
 	}
 
 	function deleteDefi($idEvent)

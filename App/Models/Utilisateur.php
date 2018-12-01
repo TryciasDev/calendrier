@@ -5,38 +5,60 @@ class Utilisateur extends DB\SQL\Mapper {
 		// This is where the mapper and DB structure synchronization occurs
 		parent::__construct($db,'participants');
 	}
-
-
-	function updateProfil($id,$pseudo, $nom,$prenom,$conditions = null,$email)
+	/*
+	 * Génére un id en créer le md5 du nombre de participant
+	 */
+    function  getNouvelIdentifiant()
+    {
+        $requete ="select md5(count(1)+1) from participants";
+        $id = $this->db->exec($requete);
+        var_dump($id);
+        die;
+        return $id;        
+    }
+	
+	function updateProfil($uid = null, $idGoogle = null, $pseudo, $nom,$prenom,$conditions = null,$email, $picto = null)
 	{
 		$participant = new DB\SQL\Mapper($this->db, 'participants');
-		//var_dump($id);die;
-		if(!is_null($id)){
-			$participant->load(array('numero=?',$id));
+		if(!is_null($uid)){
+			$participant->load(array('uid=?',$uid));
+			$participant->uid = $uid;
+		} elseif(!is_null($idGoogle)){
+		    $participant->load(array('idGoogle=?',$idGoogle));
+		    $participant->idGoogle = $uid;
 		}
-		$participant->identifiant = $pseudo;
+		if(is_null($uid))
+		{
+		    $participant->uid = $this->getNouvelIdentifiant();
+		}
+		$participant->pseudo = $pseudo;
 		$participant->Nom = $nom;
 		$participant->Prenom = $prenom;
 		$participant->email = $email;
 		if(!is_null($conditions))
 		{
-			$participant->Conditions = $conditions;
+			$participant->conditions = $conditions;
+		}
+		if(!is_null($picto))
+		{
+			$participant->picto = $picto;
 		}
 		$participant->save();
-		if(!is_null($id)){
-			$participant->numero = $participant->get('numero'); 
-		}
+		/*if(!is_null($id)){
+			$participant->uid = $participant->get('uid'); 
+		}*/
 		return $participant;
 	}
+
 	function getAmis($id)
 	{
 
-		$requete ="select numero, identifiant, nom, prenom from participants".
-							" join lienUsers liens1 on liens1.user1 = participants.numero".
+		$requete ="select uid, pseudo, nom, prenom from participants".
+							" join amis liens1 on liens1.user1 = participants.uid".
 							" where liens1.user2 = ?".
 							" union".
-							" select numero, identifiant, nom, prenom from participants".
-							" join lienUsers liens2 on liens2.user2 = participants.numero".
+							" select uid, pseudo, nom, prenom from participants".
+							" join amis liens2 on liens2.user2 = participants.uid".
 							" where liens2.user1 = ?";
 		$listeIdAmis = $this->db->exec($requete, array($id, $id));
 		//return $this->find(array());
@@ -49,10 +71,22 @@ class Utilisateur extends DB\SQL\Mapper {
 		$participant->amis = $this->getAmis($id);
 		return $participant;
 	}
-	function getProfilSimple($id)
+	function getByEmail($email)
 	{
 		$participant = new DB\SQL\Mapper($this->db, 'participants');
-		$participant->load(array('numero=?',$id));
+		$participant->load(array('email=?',$email));
+		return $participant;
+	}
+	function getProfilSimple($id)
+	{
+	    $participant = new DB\SQL\Mapper($this->db, 'participants');
+	    $participant->load(array('uid=?',$id));
+	    return $participant;
+	}
+	function getProfilGoogle($id)
+	{
+		$participant = new DB\SQL\Mapper($this->db, 'participants');
+		$participant->load(array('idGoogle=?',$id));
 		return $participant;
 	}
 

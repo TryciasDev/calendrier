@@ -23,9 +23,16 @@ class CalendrierController extends Controller
     $event = new Evenement($this->db);
     $jourCible = new DateTime('201812'.$jour);
     $isSaved = $event->saveDefi($auteurId,$victimeId, $defi,$jourCible, $idEvent);
-    var_dump($isSaved);
-die;
-    $event->getEvent($isSaved->idEvent);
+
+    $return_array = array('idEvent' => $isSaved[0]['idEvent'],
+                            'victime' => $isSaved[0]['victime'],
+                            'auteur' => $isSaved[0]['auteur'],
+                            'jour' =>  $jour,
+                            'auteurNom' => $auteur->pseudo,
+                            'defi' => $isSaved[0]['description']
+      );
+    echo json_encode($return_array);
+  
 
 /*
     if($event != '') {
@@ -56,7 +63,7 @@ die;
     $victimeId = $this->f3->get('PARAMS.ami');
     $victime = $user->getProfilSimple($victimeId);
     $jours = $this->prepareListDays();
-    $weekDays = $this->prepareListweekdays();
+    //$weekDays = $this->prepareListweekdays();
     $nbDefisTotal = $calendrier->getNbDefiByDay($victimeId);
     $cal = $calendrier->getCalendrierAmi($victimeId,$this->f3->get('PARAMS.id'));
     foreach ($nbDefisTotal as  $nb)
@@ -68,8 +75,7 @@ die;
       $jours[$event['numeroJour']-1]['nbDefi'] = $jours[$event['numeroJour']-1]['nbDefi']+1 ;
       $jours[$event['numeroJour']-1]['defis'][] = array('desc'=> $event['description'], 
                                                         'auteur'=>$event['pseudoAuteur'],
-                                                        'idAuteur'=>$event['numero'],
-                                                        'isDone'=>$event['isDone'],
+                                                        'idAuteur'=>$event['uidAuteur'],
                                                         'commentaireVictime'=>$event['comment'],
                                                         'dateRealisation'=>$event['date'],
                                                         'idEvent'=>$event['idEvenement']);

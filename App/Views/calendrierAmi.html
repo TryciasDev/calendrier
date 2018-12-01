@@ -1,37 +1,37 @@
 <div class="jumbotron jumbotron-fluid text-center">
-		  <h1>Calendrier de {{@ami->identifiant}} ...</h1>
-		  <p>Ci dessous le calendrier de {{@ami->identifiant}} concoctée par toi et vos amis commun.</p>
+		  <h1>Calendrier de {{@ami->pseudo}} ...</h1>
+		  <p>Ci dessous le calendrier de {{@ami->pseudo}} concoctée par toi et vos amis commun.</p>
 		  <p>les défis, attentions, portée par des tiers absent de ton cercle ne sont te sont pas visible</p> 
 </div>
 <div class="modal fade" id="confirmAddDefi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Avant de valider, êtes vous sûr que {{@ami->pseudo}}  va apprécier ?</h5>
+        <input type="hidden" name="idDuFormulaire" id="idDuFormulaire"/>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-  <p><br> </p>
+  <p>Est ce que votre surprise est en accord avec le message laisser par {{@ami->pseudo}} : {{@ami->Conditions}} </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="GoToTheStart">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <!--repeat group="{{ @datas }}" value="{{ @jour }}" key="{{ @ikey }}"-->
   <repeat group="{{ @datas }}" key="{{ @jour }}" value="{{ @infos }}">
     <div class="card" id="{{ @jour }}">
       <div class="card-body">
         <h5 class="card-title">{{ @infos['date'] }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ @infos['nbDefiTotal'] }} défis dont {{ @infos['nbDefi'] }}  fourni par votre groupe d'ami commun</h6>
         <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
-          <p class="card-text">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}: <span id="descDefi_{{ @jour+1}}"> {{ @defi['desc'] }}</span>
+          <p class="card-text" id="defiText_{{ @jour+1 }}_{{ @defi['auteur'] }}_{{ @defi['idEvent']}}">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}: <span id="descDefi_{{ @jour+1}}"> {{ @defi['desc'] }}</span>
           <check if="{{ @auteur==@defi['idAuteur'] }}">
               <true>
                 <a class="card-link addDefi" href="#" id="updateDefi{{@jour+1}}" data-idEvent="{{ @defi['idEvent']}}">modifier</a>
@@ -42,7 +42,7 @@
               </true>
           </check>
           </p>
-          <check if="{{ @defi['isDone'] == 'true'}}">
+          <check if="{{ !empty(@defi['commentaireVictime'])}}">
               <true>
               <h12> Le {{ @defi['dateRealisation'] }} :  {{ @defi['commentaireVictime'] }}  </h12>
                </true>
@@ -53,13 +53,14 @@
 			<div class="hide" id="addDefi_{{ @jour+1 }}">
 				<form id="formulaire_{{ @jour+1 }}">
 					<input type="text" name="auteur" id="auteur_{{ @jour+1 }}" value="{{@auteur}}" />
-					<input type="text" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami->numero}}" />
-					<input type="text" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
+					<input type="text" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami->uid}}" />
+          <input type="text" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
+					<input type="text" name="jour" value="{{ @jour+1 }}" />
 				  <div class="form-group">
 					<label for="defi">Défis</label>
 					<textarea class="form-control form-control-plaintext" id="defi_{{ @jour+1 }}" name="defi" rows="3" maxlength="250"></textarea>
 				  </div>
-				<button class="btn btn-primary" id="Save_{{ @jour+1 }}" data-jour="{{ @jour+1 }}" data-toggle="modal" data-target="#confirmAddDefi" data-victime="{{@ami->identifiant}}" >Enregistrer</button>
+          <a class="btn btn-primary" id="Save_{{ @jour+1 }}" data-jour="{{ @jour+1 }}" data-toggle="modal" data-target="#confirmAddDefi" data-victime="{{@ami->pseudo}}" href="#" role="button">Enregistrer</a>
 				</form>
 			</div>
       </p>
@@ -70,96 +71,103 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $(".hide").hide();
+
+    $("#GoToTheStart").click(function(){
+      var idForm = $("#idDuFormulaire").val();
+      var auteur = $("#auteur_"+idForm).val();
+      var victime = $("#victime_"+idForm).val();
+      var idEvent = $("#idEvent_"+idForm).val();
+      var defi = $("#defi_"+idForm).val();
+      var url = "/addDefi/{{@auteur}}/{{@ami->uid}}/"+idForm;
+      if(idEvent.trim() != '')
+      {
+        url = url+"/"+idEvent;
+      }
+      var data = {auteurId:auteur, 
+                  victimeId:victime, 
+                  defi:defi, 
+                  jour:idForm,
+                  idEvent:idEvent}
+                  ;
+      console.log("idForm : "+idForm);
+      console.log("auteur : "+auteur);
+      console.log("victime : "+victime);
+      console.log("idEvent : "+idEvent);
+      console.log("defi : "+defi);
+      console.log("datas : "+data);
+      console.log("url : "+url);
+      var modal = $(this)
+      $.post({url: url,
+              data: data,
+               success: function(result){
+             console.log('SUCCESS : '+result);
+             var resultat = JSON.parse(result);
+             var idParagraphe = "defiText_"+resultat.jour+"_"+resultat.auteur+"_"+resultat.idEvent;
+             console.log(idParagraphe);
+             var nouveauText = "Défi #{{ @id+1 }} par "+resultat.auteurNom+": <span id='descDefi_"+resultat.jour+"'> "+resultat.defi+"</span><a class='card-link addDefi' href='#' id='updateDefi"+resultat.jour+"' data-idEvent='"+resultat.idEvent+"'>modifier</a><a class='card-link' href='javascript:deleteDefi("+resultat.idEvent+")'>supprimer</a> ";
+                var nouveauParagraphe = "<p class='card-text' id='"+idParagraphe+"'>"+nouveauText+"</p>";
+             //si update on remplace le P déjà utilisé
+             if($("#"+idParagraphe).length){
+                $("#"+idParagraphe).text(nouveauText);
+             } else {
+             //si ajout on ajoute une ligne avec ce nouveau défi
+                $("#"+idParagraphe).text(nouveauText);
+             }
+             // et enfin on dégage cette putain de modal!!!
+             $("#addDefi_"+resultat.jour).hide();
+             $('#confirmAddDefi').modal('hide');
+          }})
+        .done(function(e){
+            console.log("test : Done" );
+          })
+        .fail(function(e) {
+            console.log( "error" +e);
+          })
+        .always(function() {
+            console.log( "complete" );
+          })
+        ;
+
+    });
+
 	  // avant envoie du formulaire, on fait une alerte pour s'assurer que le défi conviendra à sa victime
 		$('#confirmAddDefi').on('show.bs.modal', function (event) {
 			  var button = $(event.relatedTarget) // Button that triggered the modal
 			  var jour = button.data('jour') // Extract info from data-* attributes
 			  var idEvent = button.data('idEvent') // Extract info from data-* attributes
 			  var victime = button.data('victime') // Extract info from data-* attributes
+        $("#idDuFormulaire").val(jour);
 			  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
 			  var modal = $(this)
 
-			  modal.find('.modal-title').text("Avant de valider, êtes vous sûr que "+victime+" va apprécier ?")
-			  modal.find('.modal-body').text("Est ce que votre surprise est en accord avec le message laisser par "+victime+" : Alors voilà.		Pour le sport, il ne faut pas que le tout fasse plus de quinze minutes (hors weekend). Pour le reste, je laisse libre à votre imagination")
+        if($("#auteur_"+jour).val() == undefined || $("#auteur_"+jour).val() == '')
+        {
+          alert('Désolé, nous avons perdu votre connexion. veuillez vous déconnecter et reconnecter');
+          modal.dismiss();
+          return false;
+        } else  if($("#victime_"+jour).val() == undefined || $("#victime_"+jour).val() == '')
+        {
+          alert('Désolé, nous avons perdu votre connexion. veuillez vous déconnecter et reconnecter');
+          modal.dismiss();
+          return false;
+        } else if($("#defi_"+jour).val() == undefined || $("#defi_"+jour).val() == '')
+        {
+          if($("#idEvent_"+jour).val() != '') {
+            alert('Le texte de la surprise/défi choisi est obligatoire. Si vous souhaitez supprimer votre attention, merci de cliquer sur supprimer');
+          modal.dismiss();
+          return false;
+          }
+          else {
+            alert('Le texte de la surprise/défi choisi est obligatoire');
+          modal.dismiss();
+          return false;
+          }
+        }
 			});
   
   <repeat group="{{ @datas }}" key="{{ @jour }}" value="{{ @infos }}">
-    $("#Save_{{ @jour+1 }}").click(function(){
-      $("#formId").val("formulaire_{{ @jour+1 }}");
-	  //étape 1 vérifier le formulaire
-	  if($("#auteur_{{ @jour+1 }}").val() == undefined || $("#auteur_{{ @jour+1 }}").val() == '')
-	  {
-	  	alert('Désolé, nous avons perdu votre connexion. veuillez vous déconnecter et reconnecter');
-	  	break;
-	  } else  if($("#victime_{{ @jour+1 }}").val() == undefined || $("#victime_{{ @jour+1 }}").val() == '')
-	  {
-	  	alert('Désolé, nous avons perdu votre connexion. veuillez vous déconnecter et reconnecter');
-	  	break;
-	  } else if($("#defi_{{ @jour+1 }}").val() == undefined || $("#defi_{{ @jour+1 }}").val() == '')
-	  {
-	  	if($("#idEvent_{{@jour+1}}.val() != '') {
-	  		alert('Le texte de la surprise/défi choisi est obligatoire. Si vous souhaitez supprimer votre attention, merci de cliquer sur supprimer');
-	  	}
-	  	else {
-	  		alert('Le texte de la surprise/défi choisi est obligatoire');
-	  	}
-	  	break;
-	  } else
-	  {
-	  	//étape 2 afficher la pop up de validation copain friendly
-	  // peut être queça se fait tout seul mais dans ce cas, il faut lui donner les billes pour envoyer le bon form
-	  }
-	  
-	  //étape 3 envoie requête ajax
-//TODO mettre en place la popup de confirmation peut se faire hors ligne
-//      $("#confirmAddDefi").show();
-	  var url = "/addDefi/{{@auteur}}/{{@ami->numero}}/{{ @jour+1 }}";
-      if($("#idEvent_{{ @jour+1 }}").val() != '')
-      {
-        url = url+"/"+$("#idEvent_{{ @jour+1 }}").val();
-      }
-      var data = {auteurId:$("#auteur_{{ @jour+1 }}").val(), 
-                  victimeId:$("#victime_{{ @jour+1 }}").val(), 
-                  defi:$("#defi_{{ @jour+1 }}").val(), 
-                  idEvent:$("#idEvent_{{ @jour+1 }}").val()}
-                  ;
-      alert(url);
-      /*
-      var posting = $.post( url, data );
-      posting.done(function( data ) {
-        alert('success');
-      });/**/
-      $.post({url: url,
-             // method = "POST",
-              data: data,
-           /*   statusCode: {
-                  404: function() {
-                    alert( "page not found" );
-                  }
-                  503: function() {
-                    alert( "forbidden" );
-                  }
-                  200: function() {
-                    alert( "fine" );
-                  }
-                },*/
-               success: function(result){
-             // $("#div1").html(result);
-             alert('SUCCESS : '+result);
-          }})
-        .done(function(){
-            alert("test : Done");
-          })
-        .fail(function() {
-            alert( "error" );
-          })
-        .always(function() {
-            alert( "complete" );
-          })
-        ;
-
-    });
     $("#addDefi{{ @jour+1 }}").click(function(){
       $("#idEvent_{{ @jour+1 }}").val('');
       $("#defi_{{ @jour+1 }}").val('Ecrire ici');

@@ -39,9 +39,9 @@ class Controller
     {
         /* on remettra un truc du genre quand on aura une authent*/
         $routeLibre = array('/', '/login', '/google_landing');
-        if($this->f3->get('SESSION.user') === null && in_array($this->f3->get('PATH'), $routeLibre) and false) {
+//        if($_SESSION['user'] === null && !in_array($this->f3->get('PATH'), $routeLibre)) {
+        if($this->f3->get('SESSION.user') === null && !in_array($this->f3->get('PATH'), $routeLibre) and false) {
             $this->f3->reroute('/login');
-//            $this->f3->reroute('/login');
             exit;
         }
         
@@ -79,23 +79,34 @@ class Controller
             array( \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION )
         );
         $this->db=$db;
+       // $db = $f3->get('DB');
+        // just create an object
+//        $session = new \DB\SQL\Session($this->db, 'sessions', true,'CSRF');
+//        $this->f3->copy('CSRF','SESSION.csrf');
+//        $this->f3->CSRF =$session->csrf();
+        new Session();
+        if($this->f3->get('PATH') == "/")
+            $this->f3->set('SESSION.test',123);
+        //echo $f3->get('SESSION.test');
     }
 
 
     function affichage()
     {
         $amis = null;
-        $numero = null;
-        //echo "<pre>"; var_dump(isset($this->f3->get("SESSION.profil")->amis)); die;
-        if($this->f3->get("SESSION.profil") !== null)
-//        if($_SESSION['profil'] !== null)
+        $uid = null;
+echo "... MA SESSION USER<br>";
+//        $session = new \DB\SQL\Session($this->db, 'sessions', true,'CSRF');
+//        $this->f3->CSRF =$session->csrf();
+//        var_dump($this->f3->get('SESSION'));
+echo "... FIN ... MA SESSION USER";
+        if($this->f3->get('SESSION.user') !== null)
         {
-            $amis = $this->f3->get("SESSION.profil")->amis ;
-            $numero = $this->f3->get("SESSION.profil")->numero ;
+            $amis = $this->f3->get("SESSION.user")->amis ;
+            $uid = $this->f3->get("SESSION.user")->uid ;
         }
-//       echo "<pre>"; var_dump($amis); die;
         $this->f3->set('amis', $amis);
-        $this->f3->set('numero', $numero);
+        $this->f3->set('uid', $uid);
         echo \Template::instance()->render('layout.html','text/html');
     }
 }

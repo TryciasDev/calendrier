@@ -1,0 +1,18 @@
+<div class="jumbotron jumbotron-fluid text-center">
+		  <h1>Pour accèder à TON calendrier il faut t'identifier</h1>
+		  <p>Pour t'éviter de te créer un enième login mot de passe on m'a soufflé d'utiliser des comptes majeur existant.</p>
+		  <p>Pour l'instant, tu peux utiliser ton compte Google, mais bientôt ton compte facebook, twiter...</p> 
+		  <p>Pas d'inquiétude, je ne vais pas aller lire les informations dans ton compte. je ne m'en sert que pour avoir ton authentification</p>
+</div>
+<div class="container-fluid">
+	 <repeat group="{{ @datas }}" key="{{ @cle }}" value="{{ @infos }}">
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="{{ @infos['logo']}}" alt="{{ @cle}}">
+		  
+		  <div class="card-body">
+		    <h5 class="card-title">Connexion avec {{ @cle}}</h5>
+		    <a href="{{ @infos['url']}}" class="btn btn-primary">Accèder à l'écran de connexion</a>
+		  </div>
+		</div>
+	 </repeat>
+</div>
