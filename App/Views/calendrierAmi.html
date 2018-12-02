@@ -31,14 +31,11 @@
         <h5 class="card-title">{{ @infos['date'] }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ @infos['nbDefiTotal'] }} défis dont {{ @infos['nbDefi'] }}  fourni par votre groupe d'ami commun</h6>
         <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
-          <p class="card-text" id="defiText_{{ @jour+1 }}_{{ @defi['auteur'] }}_{{ @defi['idEvent']}}">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}: <span id="descDefi_{{ @jour+1}}"> {{ @defi['desc'] }}</span>
+          <p class="card-text" id="defiText_{{ @jour+1 }}_{{ @uid }}_{{ @defi['idEvent']}}">Défi #{{ @id+1 }} par {{ @defi['auteur'] }}: <span id="descDefi_{{ @jour+1}}_{{ @defi['idEvent']}}"> {{ @defi['desc'] }}</span>
           <check if="{{ @auteur==@defi['idAuteur'] }}">
               <true>
-                <a class="card-link addDefi" href="#" id="updateDefi{{@jour+1}}" data-idEvent="{{ @defi['idEvent']}}">modifier</a>
-                
-                <!-- il serait bien que la suppression soit en ajax -->
-                <!-- tout comme l'ajout / modification des défis -->
-                <a class="card-link" href="javascript:deleteDefi({{ @defi['idEvent']}})">supprimer ({{ @defi['idEvent']}})</a>                
+                <a class="card-link addDefi" href="#" id="updateDefi{{ @defi['idEvent']}}" data-idEvent="{{ @defi['idEvent']}}">modifier</a>
+                <!--  a class="card-link" href="javascript:deleteDefi({{ @defi['idEvent']}})">supprimer ({{ @defi['idEvent']}})</a-->                
               </true>
           </check>
           </p>
@@ -52,10 +49,10 @@
 	        <a class="card-link addDefi" id="addDefi{{ @jour+1 }}" data-jour="{{ @jour+1 }}" href="#">Ajouter un défi</a>
 			<div class="hide" id="addDefi_{{ @jour+1 }}">
 				<form id="formulaire_{{ @jour+1 }}">
-					<input type="text" name="auteur" id="auteur_{{ @jour+1 }}" value="{{@auteur}}" />
-					<input type="text" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami->uid}}" />
-          <input type="text" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
-					<input type="text" name="jour" value="{{ @jour+1 }}" />
+					<input type="hidden" name="auteur" id="auteur_{{ @jour+1 }}" value="{{@auteur}}" />
+					<input type="hidden" name="victime" id="victime_{{ @jour+1 }}" value="{{@ami->uid}}" />
+          			<input type="hidden" name="idEvent" id="idEvent_{{ @jour+1 }}" value="" />
+					<input type="hidden" name="jour" value="{{ @jour+1 }}" />
 				  <div class="form-group">
 					<label for="defi">Défis</label>
 					<textarea class="form-control form-control-plaintext" id="defi_{{ @jour+1 }}" name="defi" rows="3" maxlength="250"></textarea>
@@ -104,14 +101,14 @@ $(document).ready(function(){
              var resultat = JSON.parse(result);
              var idParagraphe = "defiText_"+resultat.jour+"_"+resultat.auteur+"_"+resultat.idEvent;
              console.log(idParagraphe);
-             var nouveauText = "Défi #{{ @id+1 }} par "+resultat.auteurNom+": <span id='descDefi_"+resultat.jour+"'> "+resultat.defi+"</span><a class='card-link addDefi' href='#' id='updateDefi"+resultat.jour+"' data-idEvent='"+resultat.idEvent+"'>modifier</a><a class='card-link' href='javascript:deleteDefi("+resultat.idEvent+")'>supprimer</a> ";
-                var nouveauParagraphe = "<p class='card-text' id='"+idParagraphe+"'>"+nouveauText+"</p>";
+             var nouveauText = "Défi #{{ @id+1 }} par "+resultat.auteurNom+": <span id='descDefi_"+resultat.jour+"'> "+resultat.defi+"</span><a class='card-link addDefi' href='#' id='updateDefi"+resultat.jour+"' data-idEvent='"+resultat.idEvent+"'>modifier</a>";
+             var nouveauParagraphe = "<p class='card-text' id='"+idParagraphe+"'>"+nouveauText+"</p>";
              //si update on remplace le P déjà utilisé
              if($("#"+idParagraphe).length){
-                $("#"+idParagraphe).text(nouveauText);
+                $("#"+idParagraphe).html(nouveauText);
              } else {
              //si ajout on ajoute une ligne avec ce nouveau défi
-                $("#"+idParagraphe).text(nouveauText);
+                $("#"+idParagraphe).html(nouveauText);
              }
              // et enfin on dégage cette putain de modal!!!
              $("#addDefi_"+resultat.jour).hide();
@@ -174,7 +171,7 @@ $(document).ready(function(){
       $("#addDefi_{{ @jour+1 }}").show();
     });
       <repeat group="{{ @infos['defis'] }}" key="{{ @id }}" value="{{ @defi }}">
-        $("#updateDefi{{@jour+1}}").click(function(){
+        $("#updateDefi{{ @defi['idEvent']}}").click(function(){
           $("#idEvent_{{ @jour+1 }}").val({{ @defi['idEvent']}});
           $("#defi_{{ @jour+1 }}").val("{{ @defi['desc'] }}");
           $("#addDefi_{{ @jour+1 }}").show();

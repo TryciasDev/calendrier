@@ -1,0 +1,7 @@
+Bonjour {{@pseudoInvite}},
+
+{{@pseudo}} t'invite à venir découvrir ton calendrier de l'avent sur l'url suivante : http://calendrieravent.faitparpatricia.fr.
+Connecte toi bien avec cette adresse mail : {{@to}}.
+
+@ bientôt
+Patricia

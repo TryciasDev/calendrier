@@ -12,6 +12,18 @@ class UtilisateurController extends Controller
         $this->affichage();
   }
 
+  function getUid($uidIn = null) {
+      $uidUrl = $this->f3->get('PARAMS.uid');
+      $uidSession = $this->f3->get('SESSION.user')->uid;
+      if(!is_null($uidSession) && is_string($uidSession) && strlen(trim($uidSession))>20)
+      {
+          return $uidSession;
+      } elseif (!is_null($uidIn) && is_string($uidIn) && strlen(trim($uidIn))>20){
+          return $uidIn;
+      }
+      
+      return $uidUrl;
+  }
   /*Il il y a deux façon d'arriver ici.
    * Soit pour consulter son profil
    * Soit pour enregistrer les modifications apporté au profil
@@ -20,11 +32,7 @@ class UtilisateurController extends Controller
   function monProfil($uidIn = null)
   {
     $user = new Utilisateur($this->db);
-    $uid = $this->f3->get('PARAMS.uid');
-    if(is_null($uid) && !is_null($uidIn))
-    {
-      $uid = $uidIn;
-    }
+    $uid = $this->getUid($uidIn);
     $profil = $user->getProfil($uid);
     $this->f3->set('datas', $profil);
     //ici il faudra vérifier la capacité a récupérer les id dans les checkbox
@@ -46,35 +54,65 @@ class UtilisateurController extends Controller
   function SendInvitation()
   {
     $user = new Utilisateur($this->db);
-    $user->updateProfil(null, 
+    $invite = $user->updateProfil(null, null,
                 $this->f3->get('POST.Pseudo'),
                 $this->f3->get('POST.Nom'),
                 $this->f3->get('POST.Prenom'),
                 null,
                 $this->f3->get('POST.email'));
-    $user->addFriend($this->f3->get('SESSION.user')->uid);
+    $inviteur = $this->f3->get('SESSION.user')->uid;
+    $listAmis = $this->f3->get('POST.amis');
+    foreach ($listAmis as $amis){
+//        echo $amis." // ".$inviteur;
+        if($amis != $inviteur) {
+            $user->addAmitieInvite($amis, $inviteur);
+        }
+    }
+    
+    $this->sendInvitationMail($this->f3->get('POST.email'), $this->f3->get('POST.message'), $this->f3->get('POST.Pseudo'));
+    
 /*
   todo 
     envoyer le mail
-    récupérer le message ($this->f3->get('POST.Prenom'))
+    récupérer le message ($this->f3->get('POST.email'))
 */
-    $this->monProfil();
+    
+    $this->monProfil($inviteur);
   }
 
+  
+  function sendInvitationMail($email, $msg,$pseudoInvite)
+  {
+      $mail=new SMTP('ssl0.ovh.net',465,'SSL',$this->f3->get('mailFrom'),$this->f3->get('pwdMail'));
+      $mail->set('from',$this->f3->get('mailFrom'));
+      $mail->set('to',$email);
+      $mail->set('pseudoInvite',$email);
+      $mail->set('subject',$this->f3->get('objMailInvite'));
+      $mail->send(Template::instance()->render('email.txt'));
+  }
+  
   function saveProfil()
   {
     //mettre à jours ou insérer dans réalisation
     $user = new Utilisateur($this->db);
     $uid = $this->f3->get('POST.uid');
-    // updateProfil($uid = null, $idGoogle = null, $pseudo, $nom,$prenom,$conditions = null,$email, $picto = null
-    $user->updateProfil($uid, 
+    $profil = $user->updateProfil($uid, null,
                     $this->f3->get('POST.Pseudo'),
                     $this->f3->get('POST.Nom'),
                     $this->f3->get('POST.Prenom'),
                     $this->f3->get('POST.Conditions'),
                     $this->f3->get('POST.email'));
-
-    $this->monProfil($uid);
+    $listAmis = $this->f3->get('POST.amis');
+    foreach ($listAmis as $amis){
+        $user->addAmitie($amis);
+    }
+    if($profil instanceof ParticipantObj) {
+        $this->monProfil($uid);
+    } else {
+        $this->f3->set('erreur', $profil);
+        $this->f3->set('view', 'profil.html');
+        $this->affichage();
+    }
   }
 
 

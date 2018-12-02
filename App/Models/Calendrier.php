@@ -6,6 +6,27 @@ class Calendrier extends DB\SQL\Mapper {
 		parent::__construct($db,'evenements');
 	}
 
+	function getCalendrier($uid)
+	{
+	    
+	    $requete ="SELECT evenements.jour as numeroJour, ".
+	   	    " evenements.idEvent as idEvenement, ".
+	   	    " evenements.description, ".
+	   	    " evenements.victime as idVictime, ".
+	   	    " evenements.auteur, ".
+	   	    " realisations.comment,".
+	   	    " realisations.date,".
+	   	    " participants.pseudo as pseudoAuteur,".
+	   	    " participants.uid as uidAuteur".
+	   	    " FROM evenements".
+	   	    " left join realisations on realisations.idEvent = evenements.idEvent ".
+	   	    " join participants on participants.uid = evenements.auteur".
+	   	    " WHERE victime = :ami ".
+	   	    " ORDER by evenements.jour";
+	    $params = array('ami'=> $uid);
+	    $listeEvent = $this->db->exec($requete, $params);
+	    return $listeEvent;
+	}
 	function getCalendrierAmi($id, $uid)
 	{
 

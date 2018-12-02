@@ -3,16 +3,36 @@
   <p>Autant se préparer comme il se doit.</p> 
   <p>Chaque jour vient réaliser tes tâches qui permettront à noël d'arriver sereinement.</p> 
 </div>
+
+
+
+<div class="modal fade" id="Today" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dateDefi"></h5>
+        <input type="hidden" name="idDuFormulaire" id="idDuFormulaire"/>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="TextDefi">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="container-fluid">
 	<div class="progress">
-	  <div class="progress-bar bg-success" style="width:70%"></div>
-	  <div class="progress-bar bg-warning" style="width:16%" id="jourRetards"></div>
+	  <div class="progress-bar bg-success" style="width:{{round(@jour*100/24)}}%"></div>
 	  <div class="progress-bar bg-primary" style="width:4%" id="today"></div>
-	  <div class="progress-bar bg-danger" style="width:10%"></div>
+	  <div class="progress-bar bg-danger" style="width:{{round((24-@jour)*100/24)}}%"></div>
 	</div>	
-	<p></p>
-	<p></p>
-	<p></p>
 	<p></p>
 	<div class="btn-group">
 	  <button type="button" class="btn btn-success" disabled>réalisé</button>
@@ -20,5 +40,48 @@
 	  <button type="button" class="btn btn-primary">today's the day</button>
 	  <button type="button" class="btn btn-danger">l'avenir</button>
 	</div>
+	
+  <repeat group="{{ @datas }}" value="{{ @infos }}">
+	  <div class="row">
+		  	<repeat group="{{ @infos }}"  key="{{ @jour }}" value="{{ @tab }}">
+				<div class="col">
+				    <div class="card bg-{{@tab['colors']}}" id="{{ @jour }}">
+				      <div class="card-body">
+				        <h5 class="card-title">
+				          <check if="{{ @jour }}>={{@tab['day']}} && count({{ @tab['defis'] }}) >0">
+				              <true>
+				              	<a id="Jour_{{@tab['day']}}" 
+				              		data-toggle="modal" 
+				              		data-target="#Today" 
+				              		data-victime="{{@pseudo}}" 
+				              		data-title ="{{ @tab['date'] }}"
+				              		data-message="<repeat group="{{ @tab['defis'] }}"  key="{{ @numDefi }}" value="{{ @defi }}"><li>{{@defi['auteur']}} : {{@defi['desc']}}</li></repeat>"
+				              		href="#" 
+				              		role="button">{{ @tab['date'] }}</a>
+				               </true>
+				               <false><a href="#">{{ @tab['date'] }}</a></false>
+				          </check>
+				        </h5>
+				      </div>
+				    </div>
+				</div>
+			</repeat>
+	  </div>
+  </repeat>	
 </div>
-<script type="text/javascript" src="App/js/homeview.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".hide").hide();
+  $('#Today').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var titre = button.data('title') // Extract info from data-* attributes
+	  var msg = button.data('message') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text(titre)
+	  modal.find('.modal-body').html(msg)
+	});
+
+});
+</script><!-- script type="text/javascript" src="App/js/homeview.js"></script-->

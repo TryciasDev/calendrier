@@ -7,6 +7,80 @@ class CalendrierController extends Controller
     parent::__construct();
   }
 
+  function index()
+  {
+      $calendrier = new Calendrier($this->db);
+      $jours = $this->prepareListDays();
+      $victimeId = $this->f3->get('SESSION.user')->uid;
+      $nbDefisTotal = $calendrier->getNbDefiByDay($victimeId);
+      $cal = $calendrier->getCalendrier($victimeId);
+      
+      foreach ($nbDefisTotal as  $nb)
+      {
+          $jours[$nb['numeroJour']-1]['nbDefiTotal'] = $nb['compteur'];
+      }
+      foreach ($cal as  $event)
+      {
+          if($event['numeroJour']<=date(d))
+          {
+              $jours[$event['numeroJour']-1]['defis'][] = array('desc'=> $event['description'],
+                  'auteur'=>$event['pseudoAuteur'],
+                  'idAuteur'=>$event['uidAuteur'],
+                  'commentaireVictime'=>$event['comment'],
+                  'dateRealisation'=>$event['date'],
+                  'idEvent'=>$event['idEvenement']);
+          }
+          $jours[$event['numeroJour']-1]['nbDefi'] = $jours[$event['numeroJour']-1]['nbDefi']+1 ;
+      }
+      shuffle($jours);
+      $weekDays = array();
+      $iterator = 0;
+      for($i =0; $i <6; $i++)
+      {
+          for($j=0; $j<4;$j++)
+          {
+              $weekDays[$i][$j]=$jours[$iterator];
+              $iterator++;
+          }
+      }
+      $this->f3->set('datas', $weekDays);
+      $this->f3->set('jour', date(d));
+      $this->f3->set('view', 'main.html');
+      $this->affichage();
+  }
+
+  function getJour()
+  {
+      $event = new Evenement($this->db);
+      $day = $this->jourATraiter($this->f3->get('PARAMS.day'));
+      $this->f3->set('datas', $event->listBydayAndVictim($day, 'Pat'));
+      $this->f3->set('view', 'jour.html');
+      $this->affichage();
+  }
+  
+  function retourDefi()
+  {
+      //mettre à jours ou insérer dans réalisation
+      $real = new Realisation($this->db);
+      $idEvent = $this->f3->get('PARAMS.idEvent');
+      $commentaire = $this->f3->get('PARAMS.commentaire');
+      $real->addRealisation($idEvent,$commentaire);
+      
+      $this->getJour();
+  }
+  
+  function jourATraiter($dateParam)
+  {
+      $today = date("d");
+      if(!is_null($dateParam) && $dateParam<$today)
+      {
+          return $dateParam;
+      }
+      return $today;
+  }
+  
+  
+
   function addDefi()
   {
     //$this->f3->set('mode', 'insert');
@@ -91,20 +165,34 @@ class CalendrierController extends Controller
 
   function prepareListweekdays()
   {
-	  return array(1,2,3,4,5,6,7);
+	  return array(1,2,3,4,5,6);
   }
   function prepareListDays()
   {
     $jours  = array();
+    $colors = $this->getColors();
     for($i=1 ; $i < 25 ; $i ++)
     {
       $current = new DateTime('12/'.$i.'/'.date('Y'));
       $jours[$i-1]["date"] = $current->format('d/m/Y');
+      $jours[$i-1]["day"] = $current->format('d');
       $jours[$i-1]["numeroDuJour"] = $current->format('w');
       $jours[$i-1]['nbDefi'] = 0;
       $jours[$i-1]['nbDefiTotal'] = 0;
+      $jours[$i-1]['colors'] = $colors[array_rand($colors)] ;
     }
     return $jours;
   }
 
+  function getColors()
+  {
+      $colors[] = 'dark';
+      $colors[] = 'secondary';
+      $colors[] = 'danger';
+      $colors[] = 'success';
+      $colors[] = 'warning';
+      $colors[] = 'info';
+      return $colors;
+  }
+  
 }
