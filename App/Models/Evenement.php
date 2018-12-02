@@ -31,7 +31,7 @@ class Evenement extends DB\SQL\Mapper {
 		$defi->victime = $idVictime;
 		$defi->auteur = $idAuteur;
 		$defi->description = $desc;
-		$defi->jour = $jour->format('Y-m-d');
+		$defi->jour = $jour->format('d');
 		$defi->save();
 		if(is_null($idEvent))
 		{

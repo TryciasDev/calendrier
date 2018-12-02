@@ -9,7 +9,7 @@ class Calendrier extends DB\SQL\Mapper {
 	function getCalendrierAmi($id, $uid)
 	{
 
-		$requete ="SELECT day(evenements.jour) as numeroJour, ".
+		$requete ="SELECT evenements.jour as numeroJour, ".
 					" evenements.idEvent as idEvenement, ".
 					" evenements.description, ".
 					" evenements.victime as idVictime, ".
@@ -33,7 +33,7 @@ class Calendrier extends DB\SQL\Mapper {
 
 	function getNbDefiByDay($id)
 	{
-		$requete = "select day(evenements.jour) as numeroJour, count(1) as compteur from evenements".
+		$requete = "select evenements.jour as numeroJour, count(1) as compteur from evenements".
 					" where victime = :ami".
 					" group by jour";
 		$params = array('ami'=>$id);

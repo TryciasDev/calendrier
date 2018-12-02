@@ -12,7 +12,7 @@ class Realisation extends DB\SQL\Mapper {
 		$real = new DB\SQL\Mapper($db, 'realisations');
 		$real->idEvent = $idEvent;
 		$real->comment = $comment;
-		$real->date = date("Ymd");
+//		$real->date = date("Ymd");
 		$real->save();
 	}
 	// Specialized query
