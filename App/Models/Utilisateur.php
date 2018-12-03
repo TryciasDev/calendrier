@@ -10,7 +10,7 @@ class Utilisateur extends DB\SQL\Mapper {
 	 */
     function  getNouvelIdentifiant()
     {
-        $requete ="select md5(count(1)+2) as uid from participants";
+        $requete ="select md5(concat(count(1)+2, UNIX_TIMESTAMP())) as uid from participants";
         $id = $this->db->exec($requete);
         return $id[0]['uid'];        
     }
@@ -112,7 +112,12 @@ class Utilisateur extends DB\SQL\Mapper {
 	{
 		$participant = new DB\SQL\Mapper($this->db, 'participants');
 		$participant->load(array('idGoogle=?',$id));
-		
-		return $this->mapUtilisateur($participant) ;
+		$obj = $this->mapUtilisateur($participant);
+		$amis = $this->getAmis($obj->uid);
+		foreach ($amis as $ami){
+		    $objTmp = $this->mapUtilisateur($ami);
+		    $obj->addAmi($objTmp);
+		}
+		return $obj ;
 	}
 }

@@ -15,10 +15,10 @@ class UtilisateurController extends Controller
   function getUid($uidIn = null) {
       $uidUrl = $this->f3->get('PARAMS.uid');
       $uidSession = $this->f3->get('SESSION.user')->uid;
-      if(!is_null($uidSession) && is_string($uidSession) && strlen(trim($uidSession))>20)
+      if(!is_null($uidIn) && is_string($uidIn) && strlen(trim($uidIn))>20)
       {
           return $uidSession;
-      } elseif (!is_null($uidIn) && is_string($uidIn) && strlen(trim($uidIn))>20){
+      } elseif (!is_null($uidSession) && is_string($uidSession) && strlen(trim($uidSession))>20){
           return $uidIn;
       }
       
@@ -32,18 +32,21 @@ class UtilisateurController extends Controller
   function monProfil($uidIn = null)
   {
     $user = new Utilisateur($this->db);
-    $uid = $this->getUid($uidIn);
+//    $uid = $this->getUid($uidIn);
+    $uid = $this->f3->get('SESSION.user')->uid;
     $profil = $user->getProfil($uid);
-    $this->f3->set('datas', $profil);
-    //ici il faudra vérifier la capacité a récupérer les id dans les checkbox
-    $this->f3->set('amis', $profil->amis);
     $this->f3->set('SESSION.amis', $profil->amis);
     $this->f3->set("SESSION.user", $profil);
-    $this->f3->set('mode', 'update');
-    $this->f3->set('view', 'profil.html');
-    $this->affichage();
+    $this->afficheProfil($profil);
   }
-
+  
+    function afficheProfil(ParticipantObj $participant) {
+        $this->f3->set('datas', $participant);
+        $this->f3->set('amis', $participant->amis);
+        $this->f3->set('mode', 'update');
+        $this->f3->set('view', 'profil.html');
+        $this->affichage();
+    }
   function newProfilInvitation()
   {
     $this->f3->set('mode', 'invite');
@@ -60,24 +63,16 @@ class UtilisateurController extends Controller
                 $this->f3->get('POST.Prenom'),
                 null,
                 $this->f3->get('POST.email'));
-    $inviteur = $this->f3->get('SESSION.user')->uid;
+    $inviteur = $invite->uid;
     $listAmis = $this->f3->get('POST.amis');
     foreach ($listAmis as $amis){
-//        echo $amis." // ".$inviteur;
         if($amis != $inviteur) {
             $user->addAmitieInvite($amis, $inviteur);
         }
     }
-    
     $this->sendInvitationMail($this->f3->get('POST.email'), $this->f3->get('POST.message'), $this->f3->get('POST.Pseudo'));
-    
-/*
-  todo 
-    envoyer le mail
-    récupérer le message ($this->f3->get('POST.email'))
-*/
-    
-    $this->monProfil($inviteur);
+    $this->f3->set('msg', "L'invation est parti par mail");
+    $this->afficheProfil($invite);
   }
 
   
@@ -107,7 +102,7 @@ class UtilisateurController extends Controller
         $user->addAmitie($amis);
     }
     if($profil instanceof ParticipantObj) {
-        $this->monProfil($uid);
+        $this->afficheProfil($profil);
     } else {
         $this->f3->set('erreur', $profil);
         $this->f3->set('view', 'profil.html');

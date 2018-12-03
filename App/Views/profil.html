@@ -11,8 +11,10 @@
     </false>
 </check>
 </div>
+<check if="{{ isset(@msg) }}">
+	<true><p class="text-success">{{@msg}}</p></true>
+</check>
 <div class="container-fluid">
-
 	<check if="{{ @mode=='update' }}">
     <true>
 	<form method="Post" action="/MonProfil/{{@datas->uid}}" id="formulaire">
